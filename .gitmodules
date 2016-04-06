@@ -1,0 +1,3 @@
+[submodule "cad/dependency/mppcHighVoltage"]
+	path = cad/dependency/mppcHighVoltage
+	url = git@github.com:Sawaiz/mppcHighVoltage.git
