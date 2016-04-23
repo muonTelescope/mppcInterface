@@ -1,57 +1,94 @@
-console.log("Server started");
-
+//Nodejs server contoling GPIO for HV/LV
 var mosiPin = 5;
 var sclkPin = 6;
-
+var powerOnPin = 21;
+var powerOkPin = 20;
 //Config for hvpia
-var gpioList = [22,23,25,10,15,17,18,27]
+//var gpioList = [22,23,24,10,09,25,11,08]
 //Config for hvpib
-var gpioList = [02,03,04,14,09,25,11,28]
+//var gpioList = [02,03,04,14,15,17,18,27]
+//config for sawaizTestPi
+//var gpioList = [07,12,13,19,16,26,00,00];
+// var positionList = ["FV1",
+// "FV2",
+// "FV3",
+// "FV4",
+// "FH1",
+// "FH2",
+// "FH3",
+// "FH4"]
 
+// var sawaizTestPi = {
+//   'horizontal' : {
+//     'FV1' : '07',
+//     'FV2' : '12',
+//     'FV3' : '13',
+//     'FV4' : '19'
+//   },
+//   'vertical' : {
+//     'FH1' : '16',
+//     'FH2' : '26',
+//     'FH3' : '00',
+//     'FH4' : '00'
+// }
+
+//config for sawaizTestPi
+var positionList = [
+  ["FV1",55.41,07],
+  ["FV2",56.85,12],
+  ["FV3",53.40,13],
+  ["FV4",55.03,19],
+  ["FH1",57.29,16],
+  ["FH2",56.98,26],
+  ["FH3",54.54,00],
+  ["FH4",57.42,00]
+];
+
+
+//**END CONFIGURATION**//
+console.log("Server started");
 var GPIO = require('onoff').Gpio;
 
-//Create SPI Client where spiSetup(csPin, mosiPin, sclkPin)
-//Config for hvpib
-
-var hvZeroA  = spiSetup(02, 5, 6);
-var hvZeroB  = spiSetup(03, 5, 6);
-var hvOneA   = spiSetup(04, 5, 6);
-var hvOneB   = spiSetup(14, 5, 6);
-var hvTwoA   = spiSetup(15, 5, 6);
-var hvTwoB   = spiSetup(17, 5, 6);
-var hvThreeA = spiSetup(18, 5, 6);
-var hvThreeB = spiSetup(27, 5, 6);
-
-//Config for hvpia
-/*
-var hvZeroA  = spiSetup(22, 5, 6);
-var hvZeroB  = spiSetup(23, 5, 6);
-var hvOneA   = spiSetup(25, 5, 6);
-var hvOneB   = spiSetup(10, 5, 6);
-var hvTwoA   = spiSetup(09, 5, 6);
-var hvTwoB   = spiSetup(25, 5, 6);
-var hvThreeA = spiSetup(11, 5, 6);
-var hvThreeB = spiSetup(08, 5, 6);
-*/
-
 //Place all availible clients in array
-var clients = [hvZeroA,
-               hvZeroB,
-               hvOneA,
-               hvOneB,
-               hvTwoA,
-               hvTwoB,
-               hvThreeA,
-               hvThreeB
-             ];
+var clients = [];
+for(device in positionList){
+  //Create SPI Client where spiSetup(csPin, mosiPin, sclkPin)
+  clients.push(spiSetup(positionList[device][2], mosiPin, sclkPin));
+}
+
+// var hvZeroA  = spiSetup(positionList[0][2], mosiPin, sclkPin);
+// var hvZeroB  = spiSetup(gpioList[1], mosiPin, sclkPin);
+// var hvOneA   = spiSetup(gpioList[2], mosiPin, sclkPin);
+// var hvOneB   = spiSetup(gpioList[3], mosiPin, sclkPin);
+// var hvTwoA   = spiSetup(gpioList[4], mosiPin, sclkPin);
+// var hvTwoB   = spiSetup(gpioList[5], mosiPin, sclkPin);
+// var hvThreeA = spiSetup(gpioList[6], mosiPin, sclkPin);
+// var hvThreeB = spiSetup(gpioList[7], mosiPin, sclkPin);
+//
+// //Place all availible clients in array
+// var clients = [hvZeroA,
+//                hvZeroB,
+//                hvOneA,
+//                hvOneB,
+//                hvTwoA,
+//                hvTwoB,
+//                hvThreeA,
+//                hvThreeB
+//              ];
 
 //spiSend(numToByte(2), hvThreeA);
+
+var powerOn = new GPIO(powerOnPin  , 'out');
+//var powerOk = new GPIO(powerOkPin  , 'in');
+powerOn.writeSync(0);
 
 var iv;
 iv = setInterval(function () {
   for (var i in clients) {
-    spiSend([1,1,0,0,1,0,0,0], clients[i]);
-    //spiSend([0,0,0,0,0,0,0,0], clients[i]);
+    //spiSend(voltageToByte(56.5), clients[i]);
+    spiSend(numToByte(200), clients[i]);
+    //console.log(voltageToByte(56.5));
+    //spiSend([1,1,0,0,1,0,0,0], clients[i]);
   }
 }, 200);
 
@@ -61,11 +98,11 @@ wss = new WebSocketServer({port: 8010});
 wss.on('connection', function(ws) {
   ws.on('message', function(message) {
     console.log('Received from client: %s', message);
-    message = message.split();
+    message = message.split(" ");
     if(message[0] === "clientsAvailable"){
-      ws.send(clients);
-    } else if (message[0].substring(0,1) === "hv") {
-      spiSend(voltageToByte(message[1]));
+      ws.send("positionList "+JSON.stringify(positionList));
+    } else if (message[0] === "hv") {
+      spiSend(voltageToByte(Number(message[1])), message[2]);
     }
   });
 });
@@ -85,7 +122,7 @@ function spiSend(data, device){
   // send bits 7..0
   for (i = 0; i < 8; i++){
     // set line high if bit is 1, low if bit is 0
-    if (data[i]){
+    if (data[i] === '1'){
       device.mosi.writeSync(1);
     } else{
       device.mosi.writeSync(0);
@@ -101,13 +138,12 @@ function spiSend(data, device){
 function voltageToByte(voltage){
   voltageNumber = Math.round(((((voltage-57.5)*-1)*256)/5)-1);
   voltageByte = numToByte(voltageNumber);
+  return voltageByte;
 }
 
 function numToByte(number){
-  var byteString = (number).toString(2);
-  var byte = [];
-  for (var i = 0; i < 8; i++) {
-    byte.push(byteString.charAt(i));
-  }
+  var byteString = number.toString(2);
+  var paddedByteString = ('00000000'+byteString).substring(byteString.length);
+  var byte = paddedByteString.split('');
   return byte;
 }
