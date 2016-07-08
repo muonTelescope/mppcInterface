@@ -47,6 +47,6 @@ The microcontroller on board takes commands sent to the whole module, and forwar
 The master can communicate to up to 128 slave devices the address is set within software. The master can request the temperature, or current voltage of any of the eight channels on board, select between different voltage to temperature curves, and set the bias voltage, or pulse the LED on the modules.
 
 
-[mppcInterfaceIsometric]: https://raw.githubusercontent.com/Sawaiz/mppcInterface/raspberryPi/cad/renderings/mppcInterfaceIsometric.jpg "View of Back of Board"
-[mppcInterfaceFront]: https://raw.githubusercontent.com/Sawaiz/mppcInterface/raspberryPi/cad/renderings/mppcInterfaceFront.jpg "Direct front view"
-[mppcInterfaceBack]: https://raw.githubusercontent.com/Sawaiz/mppcInterface/raspberryPi/cad/renderings/mppcInterfaceBack.jpg "Board rendering with EMI shield"
+[mppcInterfaceIsometric]: cad/renderings/mppcInterfaceIsometric.jpg "View of Back of Board"
+[mppcInterfaceFront]: cad/renderings/mppcInterfaceFront.jpg "Direct front view"
+[mppcInterfaceBack]: cad/renderings/mppcInterfaceBack.jpg "Board rendering with EMI shield"
