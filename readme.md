@@ -1,5 +1,6 @@
 # MPPC Interface
-A single assembled board breaks out singals and provides all the interfaces that 8 [MPPC Sesnor](https://github.com/Sawaiz/mppcSensor) boards need. The power to each module is supplied via the [MPPC high voltage](https://github.com/Sawaiz/mppcHighVoltage) modules attached board. It is able to be run independently for testing and debugging, or on a backplane with many others for more channels.
+A single assembled board breaks out singals and provides all the interfaces that 4 [MPPC Sesnor](https://github.com/Sawaiz/mppcSensor) boards need. The power to each module is supplied via the [MPPC high voltage](https://github.com/Sawaiz/mppcHighVoltage) modules 
+attached board. It is able to be run independently for testing and debugging, or on a backplane with many others for more channels.
 
 ![][mppcInterfaceIsometric]
 
