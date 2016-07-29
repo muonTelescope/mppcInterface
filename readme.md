@@ -1,11 +1,11 @@
 # MPPC Interface
-A single assembled board breaks out singals and provides all the interfaces that 4 [MPPC Sesnor](https://github.com/Sawaiz/mppcSensor) boards need. The power to each module is supplied via the [MPPC high voltage](https://github.com/Sawaiz/mppcHighVoltage) modules 
+A single assembled board breaks out singals and provides all the interfaces that 4 [MPPC Sesnor](https://github.com/Sawaiz/mppcSensor) boards need. The power to each module is supplied via the [MPPC high voltage](https://github.com/Sawaiz/mppcHighVoltage) modules
 attached board. It is able to be run independently for testing and debugging, or on a backplane with many others for more channels.
 
 ![][mppcInterfaceIsometric]
 
 ## Hardware
-The board is made using the JDEC MO-237 spec, used for DDR-2 memory. The board has edge connectors with 240 pins, a notch that forces only correct polarity, and locking indents on the side. The female connector is any DDR-2 memory connector that can be placed on a backplane. The PCB needs to be manufactured with a thickness of 1.2mm or it will not fit into a memory connector.
+The board attaches directly to a raspberryPi using the centered GPIO headers. The raspberryPi is mounted to the board via four standoffs. It is a stand alone board requiring no backplane. This board can be mounted via the M5 screw holes around the edge.
 
 ### Power
 Power is supplied through two pins on the edge connector, or via the micro USB port on board. There is a 600mA buck regulator that provides power when the USB port is used. The board should be powered by 3.3V and a negative power supply module with convert it to -3.3V for the biasing for the op-amps.
