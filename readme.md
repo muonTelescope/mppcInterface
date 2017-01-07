@@ -2,10 +2,10 @@
 A single assembled board breaks out singals and provides all the interfaces that 4 [MPPC Sesnor](https://github.com/Sawaiz/mppcSensor) boards need. The power to each module is supplied via the [MPPC high voltage](https://github.com/Sawaiz/mppcHighVoltage) modules
 attached board. It is able to be run independently for testing and debugging, or on a backplane with many others for more channels.
 
-![][mppcInterfaceIsometric]
+![][mppcInterfaceAssembly]
 
 ## Hardware
-The board attaches directly to a raspberryPi using the centered GPIO headers. The raspberryPi is mounted to the board via four standoffs. It is a stand alone board requiring no backplane. This board can be mounted via the M5 screw holes around the edge.
+The board attaches directly to a Raspberry Pi using the centered GPIO headers. The Raspberry Pi is mounted to the board via four standoffs. It is a stand alone board requiring no backplane. This board can be mounted via the M5 screw holes around the edge.
 
 ### Power
 Power is supplied through two pins on the edge connector, or via the micro USB port on board. There is a 600mA buck regulator that provides power when the USB port is used. The board should be powered by 3.3V and a negative power supply module with convert it to -3.3V for the biasing for the op-amps.
@@ -13,10 +13,12 @@ Power is supplied through two pins on the edge connector, or via the micro USB p
 ### High Voltage
 High voltage is supplied through a daughter board. Each channel has a independent voltage source that can be temperature modulated and monitored via the on board ADC. for more information about the modules, read [here](https://github.com/Sawaiz/mppcHighVoltage).
 
+![][mppcInterfaceTopISO]
+
 ### Microcontroller
 The side of the board has a Arduino compatible ([ATmega328](http://www.atmel.com/images/Atmel-8271-8-bit-AVR-Microcontroller-ATmega48A-48PA-88A-88PA-168A-168PA-328-328P_datasheet_Complete.pdf)) microcontroller, along with a USB part, USB to UART converter and other supporting circuitry. The button is connected to the reset pin. The programing port on board is a Tag-Connect 6 pin, and is only used for programing the Arduino bootloader.
 
-![][mppcInterfaceBack]
+![][mppcInterfaceBottom]
 
 ### I2C Switch
 As all the ADC modules on the daughter boards have the same address, a 8 channel I2C switch ([TCA9548A](http://www.ti.com/lit/ds/symlink/tca9548a.pdf)) is used to communicate to them independently. The pins attached to it are referenced as master, as the microcontroller is acting as the master controlling it.
@@ -36,7 +38,7 @@ There are eight RJ-45 jacks on the edge of the board, each jack has the followin
 | 7   | MD3+ | Signal+       |
 | 8   | MD3- | Signal-       |
 
-![][mppcInterfaceFront]
+![][mppcInterfaceBottomISO]
 
 ## Software
 The device acts as both a master and slave device. It takes instructions from an external I2C bus, and executes them on the AVR microcontroller to set voltages, provide telemetry, and preform closed loop control.
@@ -48,6 +50,7 @@ The microcontroller on board takes commands sent to the whole module, and forwar
 The master can communicate to up to 128 slave devices the address is set within software. The master can request the temperature, or current voltage of any of the eight channels on board, select between different voltage to temperature curves, and set the bias voltage, or pulse the LED on the modules.
 
 
-[mppcInterfaceIsometric]: cad/renderings/mppcInterfaceIsometric.jpg "View of Back of Board"
-[mppcInterfaceFront]: cad/renderings/mppcInterfaceFront.jpg "Direct front view"
-[mppcInterfaceBack]: cad/renderings/mppcInterfaceBack.jpg "Board rendering with EMI shield"
+[mppcInterfaceAssembly]:  cad/renderings/mppcInterfaceAssembly.png  "View of Back of Board"
+[mppcInterfaceTopISO]:    cad/renderings/mppcInterfaceTopISO.png    "Direct front view"
+[mppcInterfaceBottomISO]: cad/renderings/mppcInterfaceBottomISO.png "Board rendering with EMI shield"
+[mppcInterfaceBottom]:    cad/renderings/mppcInterfaceBottom.png    "Board rendering with EMI shield"
