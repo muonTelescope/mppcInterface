@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name tqfn-12)(type KiCad)(uri ${KIPRJMOD}/components/max1932/tqfn-12.pretty)(options "")(descr ""))
+  (lib (name ina28x)(type KiCad)(uri ${KIPRJMOD}/components/ina28x/ina28x.pretty)(options "")(descr ""))
+  (lib (name s13360-2050ve)(type KiCad)(uri ${KIPRJMOD}/components/s13360-2050ve/s13360-2050ve.pretty)(options "")(descr ""))
+)

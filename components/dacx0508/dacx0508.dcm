@@ -1,0 +1,23 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP DAC60508ZCRTE
+D 12/14/16 Bit Digital to Analog Converter 8 16-WQFN (3x3)
+$ENDCMP
+#
+$CMP DAC60508ZCYZF
+D 12/14/16 Bit Digital to Analog Converter 8 16-DSBGA
+$ENDCMP
+#
+$CMP DAC60508ZRTE
+D 12/14/16 Bit Digital to Analog Converter 8 16-WQFN (3x3)
+$ENDCMP
+#
+$CMP DAC60508ZYZF
+D 12/14/16 Bit Digital to Analog Converter 8 16-DSBGA
+$ENDCMP
+#
+$CMP DAC80508MRTE
+D 12/14/16 Bit Digital to Analog Converter 8 16-WQFN (3x3)
+$ENDCMP
+#
+#End Doc Library

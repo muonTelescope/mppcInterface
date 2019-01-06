@@ -1,0 +1,15 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP OPA842
+D Wideband, Low Distortion, Unity-Gain Stable, Voltage-Feedback Operational Amplifier
+$ENDCMP
+#
+$CMP OPA843
+D Wideband, Ultra-Low Noise, Voltage-Feedback Operational Amplifier
+$ENDCMP
+#
+$CMP OPA847
+D Wideband, Ultra-Low Noise, Voltage-Feedback Operational Amplifier with Shutdown
+$ENDCMP
+#
+#End Doc Library
