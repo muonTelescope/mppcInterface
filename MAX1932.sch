@@ -307,7 +307,7 @@ Wire Wire Line
 	4050 3200 4100 3200
 Wire Wire Line
 	4100 3300 4050 3300
-Text HLabel 8350 2350 2    50   Input ~ 0
+Text HLabel 7950 2350 2    50   Input ~ 0
 HV
 $Comp
 L Device:C C?
@@ -427,85 +427,6 @@ Wire Wire Line
 Wire Wire Line
 	7450 2350 7550 2350
 $Comp
-L Jumper:SolderJumper_2_Open JP1
-U 1 1 5C3A13C0
-P 8000 2500
-F 0 "JP1" V 7954 2568 50  0000 L CNN
-F 1 "CAL" V 8045 2568 50  0000 L CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 8000 2500 50  0001 C CNN
-F 3 "~" H 8000 2500 50  0001 C CNN
-	1    8000 2500
-	0    1    1    0   
-$EndComp
-$Comp
-L Connector:TestPoint TP2
-U 1 1 5C3A15B3
-P 8350 2700
-F 0 "TP2" V 8545 2774 50  0000 C CNN
-F 1 "DIV_A" V 8454 2774 50  0000 C CNN
-F 2 "TestPoint:TestPoint_THTPad_1.5x1.5mm_Drill0.7mm" H 8550 2700 50  0001 C CNN
-F 3 "~" H 8550 2700 50  0001 C CNN
-	1    8350 2700
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R_US R?
-U 1 1 5C3A1669
-P 8000 2900
-AR Path="/5C3A1669" Ref="R?"  Part="1" 
-AR Path="/5C210B26/5C3A1669" Ref="R1"  Part="1" 
-F 0 "R1" V 7795 2900 50  0000 C CNN
-F 1 "100K" V 7886 2900 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" V 8040 2890 50  0001 C CNN
-F 3 "~" H 8000 2900 50  0001 C CNN
-	1    8000 2900
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:R_US R?
-U 1 1 5C3A16C7
-P 8000 3300
-AR Path="/5C3A16C7" Ref="R?"  Part="1" 
-AR Path="/5C210B26/5C3A16C7" Ref="R47"  Part="1" 
-F 0 "R47" V 7795 3300 50  0000 C CNN
-F 1 "10K" V 7886 3300 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" V 8040 3290 50  0001 C CNN
-F 3 "~" H 8000 3300 50  0001 C CNN
-	1    8000 3300
-	-1   0    0    1   
-$EndComp
-$Comp
-L Jumper:SolderJumper_2_Open JP3
-U 1 1 5C3A3B39
-P 8000 3700
-F 0 "JP3" V 7954 3768 50  0000 L CNN
-F 1 "CAL" V 8045 3768 50  0000 L CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 8000 3700 50  0001 C CNN
-F 3 "~" H 8000 3700 50  0001 C CNN
-	1    8000 3700
-	0    1    1    0   
-$EndComp
-$Comp
-L Connector:TestPoint TP4
-U 1 1 5C3A14B5
-P 7900 3500
-F 0 "TP4" V 8100 3600 50  0000 C CNN
-F 1 "DIV_C" V 8000 3600 50  0000 C CNN
-F 2 "TestPoint:TestPoint_THTPad_1.5x1.5mm_Drill0.7mm" H 8100 3500 50  0001 C CNN
-F 3 "~" H 8100 3500 50  0001 C CNN
-	1    7900 3500
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	8000 3550 8000 3500
-Wire Wire Line
-	7900 3500 8000 3500
-Connection ~ 8000 3500
-Wire Wire Line
-	8000 3500 8000 3450
-Wire Wire Line
-	8000 2650 8000 2700
-$Comp
 L Connector:TestPoint TP1
 U 1 1 5C3A155F
 P 7750 2350
@@ -516,51 +437,10 @@ F 3 "~" H 7950 2350 50  0001 C CNN
 	1    7750 2350
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5C3B0B11
-P 8000 3900
-AR Path="/5C3B0B11" Ref="#PWR?"  Part="1" 
-AR Path="/5C210B26/5C3B0B11" Ref="#PWR0105"  Part="1" 
-F 0 "#PWR0105" H 8000 3650 50  0001 C CNN
-F 1 "GND" H 8005 3727 50  0000 C CNN
-F 2 "" H 8000 3900 50  0001 C CNN
-F 3 "" H 8000 3900 50  0001 C CNN
-	1    8000 3900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8000 3900 8000 3850
 Wire Wire Line
 	7550 2350 7750 2350
 Connection ~ 7550 2350
-Wire Wire Line
-	7750 2350 8000 2350
 Connection ~ 7750 2350
 Wire Wire Line
-	8000 2350 8350 2350
-Connection ~ 8000 2350
-$Comp
-L Connector:TestPoint TP3
-U 1 1 5C3A15F5
-P 7900 3100
-F 0 "TP3" V 8095 3174 50  0000 C CNN
-F 1 "DIV_B" V 8004 3174 50  0000 C CNN
-F 2 "TestPoint:TestPoint_THTPad_1.5x1.5mm_Drill0.7mm" H 8100 3100 50  0001 C CNN
-F 3 "~" H 8100 3100 50  0001 C CNN
-	1    7900 3100
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	7900 3100 8000 3100
-Wire Wire Line
-	8000 3150 8000 3100
-Wire Wire Line
-	8350 2700 8000 2700
-Connection ~ 8000 2700
-Wire Wire Line
-	8000 2700 8000 2750
-Wire Wire Line
-	8000 3050 8000 3100
-Connection ~ 8000 3100
+	7750 2350 7950 2350
 $EndSCHEMATC
