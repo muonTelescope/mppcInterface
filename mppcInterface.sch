@@ -290,45 +290,45 @@ DAC1
 $Comp
 L Mechanical:MountingHole H1
 U 1 1 5C270EB3
-P 9300 5000
-F 0 "H1" H 9400 5046 50  0000 L CNN
-F 1 "MountingHole" H 9400 4955 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.7mm_M2.5_DIN965" H 9300 5000 50  0001 C CNN
-F 3 "~" H 9300 5000 50  0001 C CNN
-	1    9300 5000
+P 9750 4950
+F 0 "H1" H 9850 4996 50  0000 L CNN
+F 1 "MountingHole" H 9850 4905 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_DIN965" H 9750 4950 50  0001 C CNN
+F 3 "~" H 9750 4950 50  0001 C CNN
+	1    9750 4950
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H2
 U 1 1 5C270F65
-P 9300 5300
-F 0 "H2" H 9400 5346 50  0000 L CNN
-F 1 "MountingHole" H 9400 5255 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.7mm_M2.5_DIN965" H 9300 5300 50  0001 C CNN
-F 3 "~" H 9300 5300 50  0001 C CNN
-	1    9300 5300
+P 9750 5250
+F 0 "H2" H 9850 5296 50  0000 L CNN
+F 1 "MountingHole" H 9850 5205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_DIN965" H 9750 5250 50  0001 C CNN
+F 3 "~" H 9750 5250 50  0001 C CNN
+	1    9750 5250
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H3
 U 1 1 5C270FAD
-P 9300 5600
-F 0 "H3" H 9400 5646 50  0000 L CNN
-F 1 "MountingHole" H 9400 5555 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.7mm_M2.5_DIN965" H 9300 5600 50  0001 C CNN
-F 3 "~" H 9300 5600 50  0001 C CNN
-	1    9300 5600
+P 9750 5550
+F 0 "H3" H 9850 5596 50  0000 L CNN
+F 1 "MountingHole" H 9850 5505 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_DIN965" H 9750 5550 50  0001 C CNN
+F 3 "~" H 9750 5550 50  0001 C CNN
+	1    9750 5550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H4
 U 1 1 5C271017
-P 9300 5900
-F 0 "H4" H 9400 5946 50  0000 L CNN
-F 1 "MountingHole" H 9400 5855 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.7mm_M2.5_DIN965" H 9300 5900 50  0001 C CNN
-F 3 "~" H 9300 5900 50  0001 C CNN
-	1    9300 5900
+P 9750 5850
+F 0 "H4" H 9850 5896 50  0000 L CNN
+F 1 "MountingHole" H 9850 5805 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_DIN965" H 9750 5850 50  0001 C CNN
+F 3 "~" H 9750 5850 50  0001 C CNN
+	1    9750 5850
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -403,12 +403,12 @@ Wire Wire Line
 $Comp
 L Connector:Raspberry_Pi_2_3 J9
 U 1 1 5C2D1722
-P 1700 2200
-F 0 "J9" H 1700 2200 50  0000 C CNN
-F 1 "Raspberry_Pi_2_3" H 1350 1300 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x20_P2.54mm_Vertical" H 1700 2200 50  0001 C CNN
-F 3 "https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/rpi_SCH_3bplus_1p0_reduced.pdf" H 1700 2200 50  0001 C CNN
-	1    1700 2200
+P 1850 2200
+F 0 "J9" H 1850 2200 50  0000 C CNN
+F 1 "Raspberry_Pi_2_3" H 1500 1300 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x20_P2.54mm_Vertical" H 1850 2200 50  0001 C CNN
+F 3 "https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/rpi_SCH_3bplus_1p0_reduced.pdf" H 1850 2200 50  0001 C CNN
+	1    1850 2200
 	1    0    0    -1  
 $EndComp
 Text GLabel 10100 900  2    50   Input ~ 0
@@ -437,108 +437,108 @@ Wire Wire Line
 	9750 4400 9850 4400
 Wire Wire Line
 	9750 3900 9850 3900
-Text GLabel 2550 2500 2    50   Input ~ 0
+Text GLabel 2700 2500 2    50   Input ~ 0
 MISO
-Text GLabel 2550 2600 2    50   Input ~ 0
+Text GLabel 2700 2600 2    50   Input ~ 0
 MOSI
-Text GLabel 2550 2700 2    50   Input ~ 0
+Text GLabel 2700 2700 2    50   Input ~ 0
 SCLK
 Wire Wire Line
-	1500 900  1500 850 
+	1650 900  1650 850 
 Wire Wire Line
-	1500 850  1550 850 
+	1650 850  1700 850 
 Wire Wire Line
-	1600 850  1600 900 
+	1750 850  1750 900 
 Wire Wire Line
-	1800 900  1800 850 
+	1950 900  1950 850 
 Wire Wire Line
-	1800 850  1850 850 
+	1950 850  2000 850 
 Wire Wire Line
-	1900 850  1900 900 
+	2050 850  2050 900 
 $Comp
 L power:+3V3 #PWR059
 U 1 1 5C2FC91C
-P 1850 800
-F 0 "#PWR059" H 1850 650 50  0001 C CNN
-F 1 "+3V3" H 1865 973 50  0000 C CNN
-F 2 "" H 1850 800 50  0001 C CNN
-F 3 "" H 1850 800 50  0001 C CNN
-	1    1850 800 
+P 2000 800
+F 0 "#PWR059" H 2000 650 50  0001 C CNN
+F 1 "+3V3" H 2015 973 50  0000 C CNN
+F 2 "" H 2000 800 50  0001 C CNN
+F 3 "" H 2000 800 50  0001 C CNN
+	1    2000 800 
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1850 800  1850 850 
-Connection ~ 1850 850 
+	2000 800  2000 850 
+Connection ~ 2000 850 
 Wire Wire Line
-	1850 850  1900 850 
+	2000 850  2050 850 
 $Comp
 L power:+5V #PWR057
 U 1 1 5C2FEBA3
-P 1550 800
-F 0 "#PWR057" H 1550 650 50  0001 C CNN
-F 1 "+5V" H 1565 973 50  0000 C CNN
-F 2 "" H 1550 800 50  0001 C CNN
-F 3 "" H 1550 800 50  0001 C CNN
-	1    1550 800 
+P 1700 800
+F 0 "#PWR057" H 1700 650 50  0001 C CNN
+F 1 "+5V" H 1715 973 50  0000 C CNN
+F 2 "" H 1700 800 50  0001 C CNN
+F 3 "" H 1700 800 50  0001 C CNN
+	1    1700 800 
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1550 800  1550 850 
-Connection ~ 1550 850 
+	1700 800  1700 850 
+Connection ~ 1700 850 
 Wire Wire Line
-	1550 850  1600 850 
+	1700 850  1750 850 
 Wire Wire Line
-	1300 3500 1300 3550
+	1450 3500 1450 3550
 Wire Wire Line
-	1300 3550 1400 3550
+	1450 3550 1550 3550
 Wire Wire Line
-	1400 3550 1400 3500
+	1550 3550 1550 3500
 Wire Wire Line
-	1400 3550 1500 3550
+	1550 3550 1650 3550
 Wire Wire Line
-	1500 3550 1500 3500
-Connection ~ 1400 3550
+	1650 3550 1650 3500
+Connection ~ 1550 3550
 Wire Wire Line
-	1500 3550 1600 3550
+	1650 3550 1750 3550
 Wire Wire Line
-	1600 3550 1600 3500
-Connection ~ 1500 3550
+	1750 3550 1750 3500
+Connection ~ 1650 3550
 Wire Wire Line
-	1600 3550 1650 3550
+	1750 3550 1800 3550
 Wire Wire Line
-	1700 3550 1700 3500
-Connection ~ 1600 3550
+	1850 3550 1850 3500
+Connection ~ 1750 3550
 Wire Wire Line
-	1700 3550 1800 3550
+	1850 3550 1950 3550
 Wire Wire Line
-	1800 3550 1800 3500
-Connection ~ 1700 3550
+	1950 3550 1950 3500
+Connection ~ 1850 3550
 Wire Wire Line
-	1800 3550 1900 3550
+	1950 3550 2050 3550
 Wire Wire Line
-	1900 3550 1900 3500
-Connection ~ 1800 3550
+	2050 3550 2050 3500
+Connection ~ 1950 3550
 Wire Wire Line
-	1900 3550 2000 3550
+	2050 3550 2150 3550
 Wire Wire Line
-	2000 3550 2000 3500
-Connection ~ 1900 3550
+	2150 3550 2150 3500
+Connection ~ 2050 3550
 $Comp
 L power:GND #PWR058
 U 1 1 5C315005
-P 1650 3600
-F 0 "#PWR058" H 1650 3350 50  0001 C CNN
-F 1 "GND" H 1655 3427 50  0000 C CNN
-F 2 "" H 1650 3600 50  0001 C CNN
-F 3 "" H 1650 3600 50  0001 C CNN
-	1    1650 3600
+P 1800 3600
+F 0 "#PWR058" H 1800 3350 50  0001 C CNN
+F 1 "GND" H 1805 3427 50  0000 C CNN
+F 2 "" H 1800 3600 50  0001 C CNN
+F 3 "" H 1800 3600 50  0001 C CNN
+	1    1800 3600
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1650 3600 1650 3550
-Connection ~ 1650 3550
+	1800 3600 1800 3550
+Connection ~ 1800 3550
 Wire Wire Line
-	1650 3550 1700 3550
+	1800 3550 1850 3550
 Text GLabel 7750 1000 0    50   Input ~ 0
 SCLK
 Text GLabel 7750 1100 0    50   Input ~ 0
@@ -562,8 +562,8 @@ F 3 "" H 5450 3500 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	5150 3500 5150 3600
-NoConn ~ 2500 2300
-NoConn ~ 2500 2400
+NoConn ~ 2650 2300
+NoConn ~ 2650 2400
 Text GLabel 7750 900  0    50   Input ~ 0
 HV_CS
 Text GLabel 6900 2150 0    50   Input ~ 0
@@ -611,11 +611,11 @@ CL
 Wire Wire Line
 	7750 1200 7800 1200
 Wire Wire Line
-	2550 2700 2500 2700
+	2700 2700 2650 2700
 Wire Wire Line
-	2500 2600 2550 2600
+	2650 2600 2700 2600
 Wire Wire Line
-	2550 2500 2500 2500
+	2700 2500 2650 2500
 $Sheet
 S 7800 800  550  500 
 U 5C210B26
@@ -897,29 +897,29 @@ Connection ~ 1400 5900
 $Comp
 L Connector:TestPoint TP?
 U 1 1 5C3D0D7D
-P 10400 5200
+P 8400 5150
 AR Path="/5C210B26/5C3D0D7D" Ref="TP?"  Part="1" 
 AR Path="/5C3D0D7D" Ref="TP2"  Part="1" 
-F 0 "TP2" H 10458 5320 50  0000 L CNN
-F 1 "GND" H 10458 5229 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Bridge_Pitch2.0mm_Drill0.7mm" H 10600 5200 50  0001 C CNN
-F 3 "~" H 10600 5200 50  0001 C CNN
-	1    10400 5200
+F 0 "TP2" H 8458 5270 50  0000 L CNN
+F 1 "GND" H 8458 5179 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Bridge_Pitch2.0mm_Drill0.7mm" H 8600 5150 50  0001 C CNN
+F 3 "~" H 8600 5150 50  0001 C CNN
+	1    8400 5150
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0108
 U 1 1 5C3D0E0F
-P 10400 5250
-F 0 "#PWR0108" H 10400 5000 50  0001 C CNN
-F 1 "GND" H 10405 5077 50  0000 C CNN
-F 2 "" H 10400 5250 50  0001 C CNN
-F 3 "" H 10400 5250 50  0001 C CNN
-	1    10400 5250
+P 8400 5200
+F 0 "#PWR0108" H 8400 4950 50  0001 C CNN
+F 1 "GND" H 8405 5027 50  0000 C CNN
+F 2 "" H 8400 5200 50  0001 C CNN
+F 3 "" H 8400 5200 50  0001 C CNN
+	1    8400 5200
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	10400 5200 10400 5250
+	8400 5150 8400 5200
 $Comp
 L Regulator_SwitchedCapacitor:LM2776 U3
 U 1 1 5C3D6E4F
@@ -1060,6 +1060,93 @@ Wire Wire Line
 Connection ~ 1750 4400
 Wire Wire Line
 	1300 4800 1300 4900
+Text GLabel 2700 1900 2    50   Input ~ 0
+CLK
+NoConn ~ 2650 1300
+NoConn ~ 2650 1400
+Text GLabel 2700 1700 2    50   Input ~ 0
+SDL
+Text GLabel 2700 1600 2    50   Input ~ 0
+SDA
+Wire Wire Line
+	2700 1700 2650 1700
+Wire Wire Line
+	2650 1600 2700 1600
+Wire Wire Line
+	2700 1900 2650 1900
+Text GLabel 6350 4950 2    50   Input ~ 0
+CLK
+Wire Wire Line
+	6350 4950 6250 4950
+Text GLabel 1000 1300 0    50   Input ~ 0
+TXD
+Wire Wire Line
+	1000 1300 1050 1300
+Text GLabel 1000 1400 0    50   Input ~ 0
+RXD
+Wire Wire Line
+	1000 1400 1050 1400
+Wire Wire Line
+	1000 2200 1050 2200
+Wire Wire Line
+	1050 2100 1000 2100
+Wire Wire Line
+	1000 2000 1050 2000
+Text GLabel 1000 2600 0    50   Input ~ 0
+FPGA_DONE
+Wire Wire Line
+	1000 2600 1050 2600
+Text GLabel 1000 1800 0    50   Input ~ 0
+GPIO18
+Text GLabel 6350 5050 2    50   Input ~ 0
+GPIO18
+Text GLabel 1000 1700 0    50   Input ~ 0
+GPIO17
+Text GLabel 6350 5150 2    50   Input ~ 0
+GPIO17
+Wire Wire Line
+	1000 1800 1050 1800
+Wire Wire Line
+	1000 1700 1050 1700
+Wire Wire Line
+	6350 5050 6250 5050
+Wire Wire Line
+	6250 5150 6350 5150
+Text GLabel 1000 2900 0    50   Input ~ 0
+GPIO27
+Wire Wire Line
+	1000 2900 1050 2900
+Text GLabel 6350 5250 2    50   Input ~ 0
+GPIO27
+Wire Wire Line
+	6350 5250 6250 5250
+Text GLabel 1000 2500 0    50   Input ~ 0
+GPIO23
+Wire Wire Line
+	1000 2500 1050 2500
+Text GLabel 6350 5350 2    50   Input ~ 0
+GPIO23
+Wire Wire Line
+	6250 5350 6350 5350
+Text GLabel 1000 2400 0    50   Input ~ 0
+FPGA_CS
+Wire Wire Line
+	1000 2400 1050 2400
+Text GLabel 1000 2700 0    50   Input ~ 0
+FPGA_RST
+Wire Wire Line
+	1000 2700 1050 2700
+NoConn ~ 1000 2200
+NoConn ~ 1000 2100
+NoConn ~ 1000 2000
+Text GLabel 2700 2000 2    50   Input ~ 0
+HV_CS
+Wire Wire Line
+	2650 2000 2700 2000
+Text GLabel 1000 2800 0    50   Input ~ 0
+DAC_CS
+Wire Wire Line
+	1000 2800 1050 2800
 Wire Bus Line
 	8750 800  8750 4600
 $EndSCHEMATC

@@ -5,4 +5,5 @@
   (lib (name opa84x)(type Legacy)(uri ${KIPRJMOD}/components/opa84x/opa84x.lib)(options "")(descr ""))
   (lib (name dacx0508)(type Legacy)(uri ${KIPRJMOD}/components/dacx0508/dacx0508.lib)(options "")(descr ""))
   (lib (name ice40-lp384)(type Legacy)(uri ${KIPRJMOD}/components/ice40-lp384/ice40-lp384.lib)(options "")(descr ""))
+  (lib (name mppcInterface-rescue)(type Legacy)(uri ${KIPRJMOD}/mppcInterface-rescue.lib)(options "")(descr ""))
 )
