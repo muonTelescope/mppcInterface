@@ -1,6 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:mppcInterface-cache
-EELAYER 26 0
+EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -166,7 +166,7 @@ Wire Wire Line
 Wire Wire Line
 	9100 3400 8850 3400
 $Comp
-L power:GND #PWR03
+L mppcInterface-rescue:GND-power #PWR03
 U 1 1 5C23C4D4
 P 7700 2950
 F 0 "#PWR03" H 7700 2700 50  0001 C CNN
@@ -179,7 +179,7 @@ $EndComp
 Wire Wire Line
 	7700 2950 7700 2900
 $Comp
-L power:+5V #PWR02
+L mppcInterface-rescue:+5V-power #PWR02
 U 1 1 5C23E259
 P 7700 1650
 F 0 "#PWR02" H 7700 1500 50  0001 C CNN
@@ -192,7 +192,7 @@ $EndComp
 Wire Wire Line
 	7700 1700 7700 1650
 $Comp
-L power:+3V3 #PWR01
+L mppcInterface-rescue:+3V3-power #PWR01
 U 1 1 5C23F0C6
 P 7500 1650
 F 0 "#PWR01" H 7500 1500 50  0001 C CNN
@@ -288,7 +288,7 @@ DAC2
 Text Label 8850 1500 0    50   ~ 0
 DAC1
 $Comp
-L Mechanical:MountingHole H1
+L mppcInterface-rescue:MountingHole-Mechanical H1
 U 1 1 5C270EB3
 P 9750 4950
 F 0 "H1" H 9850 4996 50  0000 L CNN
@@ -299,7 +299,7 @@ F 3 "~" H 9750 4950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole H2
+L mppcInterface-rescue:MountingHole-Mechanical H2
 U 1 1 5C270F65
 P 9750 5250
 F 0 "H2" H 9850 5296 50  0000 L CNN
@@ -310,7 +310,7 @@ F 3 "~" H 9750 5250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole H3
+L mppcInterface-rescue:MountingHole-Mechanical H3
 U 1 1 5C270FAD
 P 9750 5550
 F 0 "H3" H 9850 5596 50  0000 L CNN
@@ -321,7 +321,7 @@ F 3 "~" H 9750 5550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole H4
+L mppcInterface-rescue:MountingHole-Mechanical H4
 U 1 1 5C271017
 P 9750 5850
 F 0 "H4" H 9850 5896 50  0000 L CNN
@@ -334,74 +334,74 @@ $EndComp
 $Comp
 L ice40-lp384:ICE40-LP384-SG32 U14
 U 1 1 5C278598
-P 5350 4800
-F 0 "U14" H 5350 4850 50  0000 C CNN
-F 1 "ICE40-LP384-SG32" H 5350 4750 50  0000 C CNN
-F 2 "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm" H 6850 3550 50  0001 C CNN
-F 3 "http://www.latticesemi.com/~/media/LatticeSemi/Documents/DataSheets/iCE/iCE40LPHXFamilyDataSheet.pdf" H 7700 3450 50  0001 C CNN
-	1    5350 4800
+P 4500 2250
+F 0 "U14" H 4500 2300 50  0000 C CNN
+F 1 "ICE40-LP384-SG32" H 4500 2200 50  0000 C CNN
+F 2 "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm" H 6000 1000 50  0001 C CNN
+F 3 "http://www.latticesemi.com/~/media/LatticeSemi/Documents/DataSheets/iCE/iCE40LPHXFamilyDataSheet.pdf" H 6850 900 50  0001 C CNN
+	1    4500 2250
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5250 3600 5250 3550
+	4400 1050 4400 1000
 Wire Wire Line
-	5250 3550 5350 3550
+	4400 1000 4500 1000
 Wire Wire Line
-	5350 3550 5350 3600
+	4500 1000 4500 1050
 Wire Wire Line
-	5350 3550 5450 3550
+	4500 1000 4600 1000
 Wire Wire Line
-	5450 3550 5450 3600
-Connection ~ 5350 3550
+	4600 1000 4600 1050
+Connection ~ 4500 1000
 Wire Wire Line
-	5450 3550 5550 3550
+	4600 1000 4700 1000
 Wire Wire Line
-	5550 3550 5550 3600
-Connection ~ 5450 3550
+	4700 1000 4700 1050
+Connection ~ 4600 1000
 Wire Wire Line
-	5550 3550 5650 3550
+	4700 1000 4800 1000
 Wire Wire Line
-	5650 3550 5650 3600
-Connection ~ 5550 3550
+	4800 1000 4800 1050
+Connection ~ 4700 1000
 $Comp
-L power:+1V2 #PWR060
+L mppcInterface-rescue:+1V2-power #PWR060
 U 1 1 5C299499
-P 5150 3500
-F 0 "#PWR060" H 5150 3350 50  0001 C CNN
-F 1 "+1V2" H 5165 3673 50  0000 C CNN
-F 2 "" H 5150 3500 50  0001 C CNN
-F 3 "" H 5150 3500 50  0001 C CNN
-	1    5150 3500
+P 4300 950
+F 0 "#PWR060" H 4300 800 50  0001 C CNN
+F 1 "+1V2" V 4300 1200 50  0000 C CNN
+F 2 "" H 4300 950 50  0001 C CNN
+F 3 "" H 4300 950 50  0001 C CNN
+	1    4300 950 
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5450 3500 5450 3550
+	4600 950  4600 1000
 Wire Wire Line
-	5250 6000 5250 6050
+	4400 3450 4400 3500
 Wire Wire Line
-	5250 6050 5350 6050
+	4400 3500 4500 3500
 Wire Wire Line
-	5350 6050 5350 6000
+	4500 3500 4500 3450
 Wire Wire Line
-	5350 6050 5450 6050
+	4500 3500 4600 3500
 Wire Wire Line
-	5450 6050 5450 6000
-Connection ~ 5350 6050
+	4600 3500 4600 3450
+Connection ~ 4500 3500
 $Comp
-L power:GND #PWR061
+L mppcInterface-rescue:GND-power #PWR061
 U 1 1 5C29F492
-P 5350 6100
-F 0 "#PWR061" H 5350 5850 50  0001 C CNN
-F 1 "GND" H 5355 5927 50  0000 C CNN
-F 2 "" H 5350 6100 50  0001 C CNN
-F 3 "" H 5350 6100 50  0001 C CNN
-	1    5350 6100
+P 4500 3550
+F 0 "#PWR061" H 4500 3300 50  0001 C CNN
+F 1 "GND" H 4505 3377 50  0000 C CNN
+F 2 "" H 4500 3550 50  0001 C CNN
+F 3 "" H 4500 3550 50  0001 C CNN
+	1    4500 3550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5350 6100 5350 6050
+	4500 3550 4500 3500
 $Comp
-L Connector:Raspberry_Pi_2_3 J9
+L mppcInterface-rescue:Raspberry_Pi_2_3-Connector J9
 U 1 1 5C2D1722
 P 1850 2200
 F 0 "J9" H 1850 2200 50  0000 C CNN
@@ -456,7 +456,7 @@ Wire Wire Line
 Wire Wire Line
 	2050 850  2050 900 
 $Comp
-L power:+3V3 #PWR059
+L mppcInterface-rescue:+3V3-power #PWR059
 U 1 1 5C2FC91C
 P 2000 800
 F 0 "#PWR059" H 2000 650 50  0001 C CNN
@@ -472,7 +472,7 @@ Connection ~ 2000 850
 Wire Wire Line
 	2000 850  2050 850 
 $Comp
-L power:+5V #PWR057
+L mppcInterface-rescue:+5V-power #PWR057
 U 1 1 5C2FEBA3
 P 1700 800
 F 0 "#PWR057" H 1700 650 50  0001 C CNN
@@ -524,7 +524,7 @@ Wire Wire Line
 	2150 3550 2150 3500
 Connection ~ 2050 3550
 $Comp
-L power:GND #PWR058
+L mppcInterface-rescue:GND-power #PWR058
 U 1 1 5C315005
 P 1800 3600
 F 0 "#PWR058" H 1800 3350 50  0001 C CNN
@@ -543,32 +543,32 @@ Text GLabel 7750 1000 0    50   Input ~ 0
 SCLK
 Text GLabel 7750 1100 0    50   Input ~ 0
 MOSI
-Text GLabel 4400 5550 0    50   Input ~ 0
+Text GLabel 3550 3000 0    50   Input ~ 0
 SCLK
-Text GLabel 4400 5350 0    50   Input ~ 0
+Text GLabel 3550 2800 0    50   Input ~ 0
 MOSI
-Text GLabel 4400 5250 0    50   Input ~ 0
+Text GLabel 3550 2700 0    50   Input ~ 0
 MISO
 $Comp
-L power:+3V3 #PWR062
+L mppcInterface-rescue:+3V3-power #PWR062
 U 1 1 5C3529BC
-P 5450 3500
-F 0 "#PWR062" H 5450 3350 50  0001 C CNN
-F 1 "+3V3" H 5465 3673 50  0000 C CNN
-F 2 "" H 5450 3500 50  0001 C CNN
-F 3 "" H 5450 3500 50  0001 C CNN
-	1    5450 3500
+P 4600 950
+F 0 "#PWR062" H 4600 800 50  0001 C CNN
+F 1 "+3V3" V 4600 1200 50  0000 C CNN
+F 2 "" H 4600 950 50  0001 C CNN
+F 3 "" H 4600 950 50  0001 C CNN
+	1    4600 950 
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5150 3500 5150 3600
+	4300 950  4300 1050
 NoConn ~ 2650 2300
 NoConn ~ 2650 2400
 Text GLabel 7750 900  0    50   Input ~ 0
 HV_CS
 Text GLabel 6900 2150 0    50   Input ~ 0
 DAC_CS
-Text GLabel 4400 5450 0    50   Input ~ 0
+Text GLabel 3550 2900 0    50   Input ~ 0
 FPGA_CS
 Text GLabel 6900 2250 0    50   Input ~ 0
 SCLK
@@ -577,21 +577,21 @@ MOSI
 Text GLabel 6900 2450 0    50   Input ~ 0
 MISO
 Wire Wire Line
-	4400 5250 4450 5250
+	3550 2700 3600 2700
 Wire Wire Line
-	4450 5350 4400 5350
+	3600 2800 3550 2800
 Wire Wire Line
-	4400 5450 4450 5450
+	3550 2900 3600 2900
 Wire Wire Line
-	4450 5550 4400 5550
-Text GLabel 4400 5050 0    50   Input ~ 0
+	3600 3000 3550 3000
+Text GLabel 3550 2500 0    50   Input ~ 0
 FPGA_RST
-Text GLabel 4400 4950 0    50   Input ~ 0
+Text GLabel 3550 2400 0    50   Input ~ 0
 FPGA_DONE
 Wire Wire Line
-	4400 4950 4450 4950
+	3550 2400 3600 2400
 Wire Wire Line
-	4450 5050 4400 5050
+	3600 2500 3550 2500
 Wire Wire Line
 	6950 2150 6900 2150
 Wire Wire Line
@@ -628,33 +628,18 @@ F5 "~CL" I L 7800 1200 50
 F6 "HV" I R 8350 1050 50 
 $EndSheet
 $Comp
-L power:+3V3 #PWR0101
+L mppcInterface-rescue:+3V3-power #PWR0101
 U 1 1 5C354717
-P 5050 2950
-F 0 "#PWR0101" H 5050 2800 50  0001 C CNN
-F 1 "+3V3" H 5065 3123 50  0000 C CNN
-F 2 "" H 5050 2950 50  0001 C CNN
-F 3 "" H 5050 2950 50  0001 C CNN
-	1    5050 2950
+P 4200 950
+F 0 "#PWR0101" H 4200 800 50  0001 C CNN
+F 1 "+3V3" V 4200 1200 50  0000 C CNN
+F 2 "" H 4200 950 50  0001 C CNN
+F 3 "" H 4200 950 50  0001 C CNN
+	1    4200 950 
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5050 3300 5050 3600
-Wire Wire Line
-	5050 2950 5050 3000
 $Comp
-L Device:D D1
-U 1 1 5C35C3CC
-P 5050 3150
-F 0 "D1" V 5096 3071 50  0000 R CNN
-F 1 "D" V 5005 3071 50  0000 R CNN
-F 2 "Diode_SMD:D_0402_1005Metric" H 5050 3150 50  0001 C CNN
-F 3 "~" H 5050 3150 50  0001 C CNN
-	1    5050 3150
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Connector:TestPoint TP?
+L mppcInterface-rescue:TestPoint-Connector TP?
 U 1 1 5C3C2C1A
 P 9850 850
 AR Path="/5C210B26/5C3C2C1A" Ref="TP?"  Part="1" 
@@ -672,7 +657,7 @@ Connection ~ 9850 900
 Wire Wire Line
 	9850 900  10100 900 
 $Comp
-L Connector:TestPoint TP?
+L mppcInterface-rescue:TestPoint-Connector TP?
 U 1 1 5C3D3F85
 P 9850 1350
 AR Path="/5C210B26/5C3D3F85" Ref="TP?"  Part="1" 
@@ -685,7 +670,7 @@ F 3 "~" H 10050 1350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:TestPoint TP?
+L mppcInterface-rescue:TestPoint-Connector TP?
 U 1 1 5C3D3FBD
 P 9850 1850
 AR Path="/5C210B26/5C3D3FBD" Ref="TP?"  Part="1" 
@@ -698,7 +683,7 @@ F 3 "~" H 10050 1850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:TestPoint TP?
+L mppcInterface-rescue:TestPoint-Connector TP?
 U 1 1 5C3D3FF7
 P 9850 2350
 AR Path="/5C210B26/5C3D3FF7" Ref="TP?"  Part="1" 
@@ -711,7 +696,7 @@ F 3 "~" H 10050 2350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:TestPoint TP?
+L mppcInterface-rescue:TestPoint-Connector TP?
 U 1 1 5C3D406D
 P 9850 2850
 AR Path="/5C210B26/5C3D406D" Ref="TP?"  Part="1" 
@@ -724,7 +709,7 @@ F 3 "~" H 10050 2850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:TestPoint TP?
+L mppcInterface-rescue:TestPoint-Connector TP?
 U 1 1 5C3D40AB
 P 9850 3350
 AR Path="/5C210B26/5C3D40AB" Ref="TP?"  Part="1" 
@@ -737,7 +722,7 @@ F 3 "~" H 10050 3350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:TestPoint TP?
+L mppcInterface-rescue:TestPoint-Connector TP?
 U 1 1 5C3D40FB
 P 9850 3850
 AR Path="/5C210B26/5C3D40FB" Ref="TP?"  Part="1" 
@@ -750,7 +735,7 @@ F 3 "~" H 10050 3850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:TestPoint TP?
+L mppcInterface-rescue:TestPoint-Connector TP?
 U 1 1 5C3D41A4
 P 9850 4350
 AR Path="/5C210B26/5C3D41A4" Ref="TP?"  Part="1" 
@@ -803,263 +788,123 @@ Wire Wire Line
 Connection ~ 9850 1400
 Wire Wire Line
 	9850 1400 10100 1400
-Text GLabel 4350 4250 0    50   Input ~ 0
+Text GLabel 3500 1700 0    50   Input ~ 0
 CH7
-Text GLabel 4350 4150 0    50   Input ~ 0
+Text GLabel 3500 1600 0    50   Input ~ 0
 CH6
-Text GLabel 6350 4150 2    50   Input ~ 0
+Text GLabel 5500 1600 2    50   Input ~ 0
 CH5
-Text GLabel 6350 4250 2    50   Input ~ 0
+Text GLabel 5500 1700 2    50   Input ~ 0
 CH4
-Text GLabel 6350 4350 2    50   Input ~ 0
+Text GLabel 5500 1800 2    50   Input ~ 0
 CH3
-Text GLabel 6350 4450 2    50   Input ~ 0
+Text GLabel 5500 1900 2    50   Input ~ 0
 CH2
-Text GLabel 6350 4550 2    50   Input ~ 0
+Text GLabel 5500 2000 2    50   Input ~ 0
 CH1
-Text GLabel 6350 4650 2    50   Input ~ 0
+Text GLabel 5500 2100 2    50   Input ~ 0
 CH0
 Wire Wire Line
-	4350 4150 4450 4150
+	3500 1600 3600 1600
 Wire Wire Line
-	4450 4250 4350 4250
+	3600 1700 3500 1700
 Wire Wire Line
-	6350 4150 6250 4150
+	5500 1600 5400 1600
 Wire Wire Line
-	6250 4250 6350 4250
+	5400 1700 5500 1700
 Wire Wire Line
-	6350 4350 6250 4350
+	5500 1800 5400 1800
 Wire Wire Line
-	6250 4450 6350 4450
+	5400 1900 5500 1900
 Wire Wire Line
-	6350 4550 6250 4550
+	5500 2000 5400 2000
 Wire Wire Line
-	6250 4650 6350 4650
+	5400 2100 5500 2100
 $Comp
-L Regulator_Linear:MIC5504-1.2YM5 U2
+L mppcInterface-rescue:MIC5504-1.2YM5-Regulator_Linear U2
 U 1 1 5C3A61F2
-P 1850 6000
-F 0 "U2" H 1850 6367 50  0000 C CNN
-F 1 "MIC5504-1.2YM5" H 1850 6276 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23-5" H 1850 5600 50  0001 C CNN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/MIC550X.pdf" H 1600 6250 50  0001 C CNN
-	1    1850 6000
+P 1300 6200
+F 0 "U2" H 1300 6567 50  0000 C CNN
+F 1 "MIC5504-1.2YM5" H 1300 6476 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-5" H 1300 5800 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/MIC550X.pdf" H 1050 6450 50  0001 C CNN
+	1    1300 6200
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+3V3 #PWR0105
+L mppcInterface-rescue:+3V3-power #PWR0105
 U 1 1 5C3A62A7
-P 1350 5900
-F 0 "#PWR0105" H 1350 5750 50  0001 C CNN
-F 1 "+3V3" H 1365 6073 50  0000 C CNN
-F 2 "" H 1350 5900 50  0001 C CNN
-F 3 "" H 1350 5900 50  0001 C CNN
-	1    1350 5900
+P 800 6100
+F 0 "#PWR0105" H 800 5950 50  0001 C CNN
+F 1 "+3V3" H 815 6273 50  0000 C CNN
+F 2 "" H 800 6100 50  0001 C CNN
+F 3 "" H 800 6100 50  0001 C CNN
+	1    800  6100
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR0106
+L mppcInterface-rescue:GND-power #PWR0106
 U 1 1 5C3A62D4
-P 1850 6350
-F 0 "#PWR0106" H 1850 6100 50  0001 C CNN
-F 1 "GND" H 1855 6177 50  0000 C CNN
-F 2 "" H 1850 6350 50  0001 C CNN
-F 3 "" H 1850 6350 50  0001 C CNN
-	1    1850 6350
+P 1300 6550
+F 0 "#PWR0106" H 1300 6300 50  0001 C CNN
+F 1 "GND" H 1305 6377 50  0000 C CNN
+F 2 "" H 1300 6550 50  0001 C CNN
+F 3 "" H 1300 6550 50  0001 C CNN
+	1    1300 6550
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+1V2 #PWR0107
+L mppcInterface-rescue:+1V2-power #PWR0107
 U 1 1 5C3A6301
-P 2300 5850
-F 0 "#PWR0107" H 2300 5700 50  0001 C CNN
-F 1 "+1V2" H 2315 6023 50  0000 C CNN
-F 2 "" H 2300 5850 50  0001 C CNN
-F 3 "" H 2300 5850 50  0001 C CNN
-	1    2300 5850
+P 1750 6050
+F 0 "#PWR0107" H 1750 5900 50  0001 C CNN
+F 1 "+1V2" H 1765 6223 50  0000 C CNN
+F 2 "" H 1750 6050 50  0001 C CNN
+F 3 "" H 1750 6050 50  0001 C CNN
+	1    1750 6050
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1450 6100 1400 6100
+	900  6300 850  6300
 Wire Wire Line
-	1400 6100 1400 5900
+	850  6300 850  6100
 Wire Wire Line
-	1400 5900 1450 5900
+	850  6100 900  6100
 Wire Wire Line
-	2300 5850 2300 5900
+	1750 6050 1750 6100
 Wire Wire Line
-	2300 5900 2250 5900
+	1750 6100 1700 6100
 Wire Wire Line
-	1850 6350 1850 6300
+	1300 6550 1300 6500
 Wire Wire Line
-	1350 5900 1400 5900
-Connection ~ 1400 5900
+	800  6100 850  6100
+Connection ~ 850  6100
 $Comp
-L Connector:TestPoint TP?
+L mppcInterface-rescue:TestPoint-Connector TP?
 U 1 1 5C3D0D7D
-P 8400 5150
+P 9250 5050
 AR Path="/5C210B26/5C3D0D7D" Ref="TP?"  Part="1" 
 AR Path="/5C3D0D7D" Ref="TP2"  Part="1" 
-F 0 "TP2" H 8458 5270 50  0000 L CNN
-F 1 "GND" H 8458 5179 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Bridge_Pitch2.0mm_Drill0.7mm" H 8600 5150 50  0001 C CNN
-F 3 "~" H 8600 5150 50  0001 C CNN
-	1    8400 5150
+F 0 "TP2" H 9308 5170 50  0000 L CNN
+F 1 "GND" H 9308 5079 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Bridge_Pitch2.0mm_Drill0.7mm" H 9450 5050 50  0001 C CNN
+F 3 "~" H 9450 5050 50  0001 C CNN
+	1    9250 5050
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR0108
+L mppcInterface-rescue:GND-power #PWR0108
 U 1 1 5C3D0E0F
-P 8400 5200
-F 0 "#PWR0108" H 8400 4950 50  0001 C CNN
-F 1 "GND" H 8405 5027 50  0000 C CNN
-F 2 "" H 8400 5200 50  0001 C CNN
-F 3 "" H 8400 5200 50  0001 C CNN
-	1    8400 5200
+P 9250 5100
+F 0 "#PWR0108" H 9250 4850 50  0001 C CNN
+F 1 "GND" H 9255 4927 50  0000 C CNN
+F 2 "" H 9250 5100 50  0001 C CNN
+F 3 "" H 9250 5100 50  0001 C CNN
+	1    9250 5100
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8400 5150 8400 5200
-$Comp
-L Regulator_SwitchedCapacitor:LM2776 U3
-U 1 1 5C3D6E4F
-P 2200 4500
-F 0 "U3" H 2350 4300 50  0000 L CNN
-F 1 "LM2776" H 2100 4450 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23-6" H 2250 4150 50  0001 L CNN
-F 3 "http://www.ti.com/lit/ds/symlink/lm2776.pdf" H 350 5750 50  0001 C CNN
-	1    2200 4500
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+5V #PWR0109
-U 1 1 5C3D75DC
-P 2200 4100
-F 0 "#PWR0109" H 2200 3950 50  0001 C CNN
-F 1 "+5V" H 2215 4273 50  0000 C CNN
-F 2 "" H 2200 4100 50  0001 C CNN
-F 3 "" H 2200 4100 50  0001 C CNN
-	1    2200 4100
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0110
-U 1 1 5C3D760D
-P 2200 4950
-F 0 "#PWR0110" H 2200 4700 50  0001 C CNN
-F 1 "GND" H 2205 4777 50  0000 C CNN
-F 2 "" H 2200 4950 50  0001 C CNN
-F 3 "" H 2200 4950 50  0001 C CNN
-	1    2200 4950
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:-5V #PWR0111
-U 1 1 5C3D765C
-P 2650 4350
-F 0 "#PWR0111" H 2650 4450 50  0001 C CNN
-F 1 "-5V" H 2665 4523 50  0000 C CNN
-F 2 "" H 2650 4350 50  0001 C CNN
-F 3 "" H 2650 4350 50  0001 C CNN
-	1    2650 4350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1800 4400 1750 4400
-Wire Wire Line
-	1750 4400 1750 4150
-Wire Wire Line
-	1750 4150 2200 4150
-Wire Wire Line
-	2200 4150 2200 4200
-Wire Wire Line
-	2200 4150 2200 4100
-Connection ~ 2200 4150
-Wire Wire Line
-	2600 4400 2650 4400
-Wire Wire Line
-	2650 4400 2650 4350
-Wire Wire Line
-	2200 4900 2200 4950
-$Comp
-L power:GND #PWR0112
-U 1 1 5C3FB554
-P 2650 4950
-F 0 "#PWR0112" H 2650 4700 50  0001 C CNN
-F 1 "GND" H 2655 4777 50  0000 C CNN
-F 2 "" H 2650 4950 50  0001 C CNN
-F 3 "" H 2650 4950 50  0001 C CNN
-	1    2650 4950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C23
-U 1 1 5C3FC376
-P 1650 4650
-AR Path="/5C3FC376" Ref="C23"  Part="1" 
-AR Path="/5C210B26/5C3FC376" Ref="C?"  Part="1" 
-F 0 "C23" H 1450 4700 50  0000 L CNN
-F 1 "1u" H 1450 4600 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 1688 4500 50  0001 C CNN
-F 3 "~" H 1650 4650 50  0001 C CNN
-	1    1650 4650
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C24
-U 1 1 5C4024E4
-P 2650 4600
-AR Path="/5C4024E4" Ref="C24"  Part="1" 
-AR Path="/5C210B26/5C4024E4" Ref="C?"  Part="1" 
-F 0 "C24" H 2750 4650 50  0000 L CNN
-F 1 "10u" H 2750 4550 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 2688 4450 50  0001 C CNN
-F 3 "~" H 2650 4600 50  0001 C CNN
-	1    2650 4600
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C22
-U 1 1 5C402572
-P 1300 4650
-AR Path="/5C402572" Ref="C22"  Part="1" 
-AR Path="/5C210B26/5C402572" Ref="C?"  Part="1" 
-F 0 "C22" H 1100 4700 50  0000 L CNN
-F 1 "10u" H 1050 4600 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 1338 4500 50  0001 C CNN
-F 3 "~" H 1300 4650 50  0001 C CNN
-	1    1300 4650
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1650 4500 1800 4500
-Wire Wire Line
-	1800 4700 1800 4800
-Wire Wire Line
-	1800 4800 1650 4800
-Wire Wire Line
-	2650 4950 2650 4750
-Wire Wire Line
-	2650 4450 2650 4400
-Connection ~ 2650 4400
-$Comp
-L power:GND #PWR0113
-U 1 1 5C41C31D
-P 1300 4900
-F 0 "#PWR0113" H 1300 4650 50  0001 C CNN
-F 1 "GND" H 1305 4727 50  0000 C CNN
-F 2 "" H 1300 4900 50  0001 C CNN
-F 3 "" H 1300 4900 50  0001 C CNN
-	1    1300 4900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1750 4400 1300 4400
-Wire Wire Line
-	1300 4400 1300 4500
-Connection ~ 1750 4400
-Wire Wire Line
-	1300 4800 1300 4900
+	9250 5050 9250 5100
 Text GLabel 2700 1900 2    50   Input ~ 0
 CLK
 NoConn ~ 2650 1300
@@ -1074,10 +919,10 @@ Wire Wire Line
 	2650 1600 2700 1600
 Wire Wire Line
 	2700 1900 2650 1900
-Text GLabel 6350 4950 2    50   Input ~ 0
+Text GLabel 5500 2400 2    50   Input ~ 0
 CLK
 Wire Wire Line
-	6350 4950 6250 4950
+	5500 2400 5400 2400
 Text GLabel 1000 1300 0    50   Input ~ 0
 TXD
 Wire Wire Line
@@ -1098,36 +943,36 @@ Wire Wire Line
 	1000 2600 1050 2600
 Text GLabel 1000 1800 0    50   Input ~ 0
 GPIO18
-Text GLabel 6350 5050 2    50   Input ~ 0
+Text GLabel 5500 2500 2    50   Input ~ 0
 GPIO18
 Text GLabel 1000 1700 0    50   Input ~ 0
 GPIO17
-Text GLabel 6350 5150 2    50   Input ~ 0
+Text GLabel 5500 2600 2    50   Input ~ 0
 GPIO17
 Wire Wire Line
 	1000 1800 1050 1800
 Wire Wire Line
 	1000 1700 1050 1700
 Wire Wire Line
-	6350 5050 6250 5050
+	5500 2500 5400 2500
 Wire Wire Line
-	6250 5150 6350 5150
+	5400 2600 5500 2600
 Text GLabel 1000 2900 0    50   Input ~ 0
 GPIO27
 Wire Wire Line
 	1000 2900 1050 2900
-Text GLabel 6350 5250 2    50   Input ~ 0
+Text GLabel 5500 2700 2    50   Input ~ 0
 GPIO27
 Wire Wire Line
-	6350 5250 6250 5250
+	5500 2700 5400 2700
 Text GLabel 1000 2500 0    50   Input ~ 0
 GPIO23
 Wire Wire Line
 	1000 2500 1050 2500
-Text GLabel 6350 5350 2    50   Input ~ 0
+Text GLabel 5500 2800 2    50   Input ~ 0
 GPIO23
 Wire Wire Line
-	6250 5350 6350 5350
+	5400 2800 5500 2800
 Text GLabel 1000 2400 0    50   Input ~ 0
 FPGA_CS
 Wire Wire Line
@@ -1147,6 +992,232 @@ Text GLabel 1000 2800 0    50   Input ~ 0
 DAC_CS
 Wire Wire Line
 	1000 2800 1050 2800
+Wire Wire Line
+	4200 950  4200 1050
+$Comp
+L Regulator_SwitchedCapacitor:LM27761 U3
+U 1 1 5D89942D
+P 1650 4600
+F 0 "U3" H 1650 5167 50  0000 C CNN
+F 1 "LM27761" H 1650 5076 50  0000 C CNN
+F 2 "Package_SON:WSON-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm" H 1800 4100 50  0001 L CNN
+F 3 "http://www.ti.com/lit/ds/symlink/lm27761.pdf" H 4150 4200 50  0001 C CNN
+	1    1650 4600
+	1    0    0    -1  
+$EndComp
+$Comp
+L mppcInterface-rescue:GND-power #PWR080
+U 1 1 5D89B24A
+P 1650 5200
+F 0 "#PWR080" H 1650 4950 50  0001 C CNN
+F 1 "GND" H 1655 5027 50  0000 C CNN
+F 2 "" H 1650 5200 50  0001 C CNN
+F 3 "" H 1650 5200 50  0001 C CNN
+	1    1650 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1650 5100 1650 5150
+Wire Wire Line
+	1650 5150 1750 5150
+Wire Wire Line
+	1750 5150 1750 5100
+Wire Wire Line
+	1650 5200 1650 5150
+Connection ~ 1650 5150
+$Comp
+L mppcInterface-rescue:C-Device C23
+U 1 1 5D8B0220
+P 1150 4750
+AR Path="/5D8B0220" Ref="C23"  Part="1" 
+AR Path="/5C210B26/5D8B0220" Ref="C?"  Part="1" 
+F 0 "C23" H 900 4800 50  0000 L CNN
+F 1 "1u" H 950 4700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 1188 4600 50  0001 C CNN
+F 3 "~" H 1150 4750 50  0001 C CNN
+	1    1150 4750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1150 4600 1250 4600
+Wire Wire Line
+	1250 4900 1150 4900
+Wire Wire Line
+	1250 4400 1200 4400
+Wire Wire Line
+	1200 4400 1200 4300
+Wire Wire Line
+	1200 4300 1250 4300
+$Comp
+L mppcInterface-rescue:C-Device C22
+U 1 1 5D8D0BAC
+P 850 4500
+AR Path="/5D8D0BAC" Ref="C22"  Part="1" 
+AR Path="/5C210B26/5D8D0BAC" Ref="C?"  Part="1" 
+F 0 "C22" H 600 4550 50  0000 L CNN
+F 1 "10u" H 600 4450 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 888 4350 50  0001 C CNN
+F 3 "~" H 850 4500 50  0001 C CNN
+	1    850  4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L mppcInterface-rescue:GND-power #PWR079
+U 1 1 5D8D186C
+P 850 5200
+F 0 "#PWR079" H 850 4950 50  0001 C CNN
+F 1 "GND" H 855 5027 50  0000 C CNN
+F 2 "" H 850 5200 50  0001 C CNN
+F 3 "" H 850 5200 50  0001 C CNN
+	1    850  5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	850  4350 850  4300
+Wire Wire Line
+	850  4300 1200 4300
+Connection ~ 1200 4300
+Wire Wire Line
+	850  5200 850  4650
+$Comp
+L mppcInterface-rescue:+5V-power #PWR078
+U 1 1 5D900672
+P 850 4250
+F 0 "#PWR078" H 850 4100 50  0001 C CNN
+F 1 "+5V" H 865 4423 50  0000 C CNN
+F 2 "" H 850 4250 50  0001 C CNN
+F 3 "" H 850 4250 50  0001 C CNN
+	1    850  4250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	850  4250 850  4300
+Connection ~ 850  4300
+$Comp
+L mppcInterface-rescue:C-Device C65
+U 1 1 5D90E485
+P 2800 4500
+AR Path="/5D90E485" Ref="C65"  Part="1" 
+AR Path="/5C210B26/5D90E485" Ref="C?"  Part="1" 
+F 0 "C65" H 2900 4550 50  0000 L CNN
+F 1 "3u3" H 2900 4450 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 2838 4350 50  0001 C CNN
+F 3 "~" H 2800 4500 50  0001 C CNN
+	1    2800 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L mppcInterface-rescue:GND-power #PWR084
+U 1 1 5D90EDB6
+P 2800 5200
+F 0 "#PWR084" H 2800 4950 50  0001 C CNN
+F 1 "GND" H 2805 5027 50  0000 C CNN
+F 2 "" H 2800 5200 50  0001 C CNN
+F 3 "" H 2800 5200 50  0001 C CNN
+	1    2800 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 4300 2800 4200
+Wire Wire Line
+	2800 4300 2800 4350
+Connection ~ 2800 4300
+Wire Wire Line
+	2800 4650 2800 5200
+$Comp
+L Device:R_US R1
+U 1 1 5D9325B3
+P 2400 4500
+F 0 "R1" H 2468 4546 50  0000 L CNN
+F 1 "1M13" H 2468 4455 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" V 2440 4490 50  0001 C CNN
+F 3 "~" H 2400 4500 50  0001 C CNN
+	1    2400 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_US R11
+U 1 1 5D932C8A
+P 2400 4900
+F 0 "R11" H 2468 4946 50  0000 L CNN
+F 1 "499k" H 2468 4855 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" V 2440 4890 50  0001 C CNN
+F 3 "~" H 2400 4900 50  0001 C CNN
+	1    2400 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L mppcInterface-rescue:C-Device C24
+U 1 1 5D9330E3
+P 2100 4900
+AR Path="/5D9330E3" Ref="C24"  Part="1" 
+AR Path="/5C210B26/5D9330E3" Ref="C?"  Part="1" 
+F 0 "C24" H 2200 4950 50  0000 L CNN
+F 1 "10u" H 2200 4850 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 2138 4750 50  0001 C CNN
+F 3 "~" H 2100 4900 50  0001 C CNN
+	1    2100 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L mppcInterface-rescue:GND-power #PWR082
+U 1 1 5D94123B
+P 2400 5200
+F 0 "#PWR082" H 2400 4950 50  0001 C CNN
+F 1 "GND" H 2405 5027 50  0000 C CNN
+F 2 "" H 2400 5200 50  0001 C CNN
+F 3 "" H 2400 5200 50  0001 C CNN
+	1    2400 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2400 4750 2400 4700
+Wire Wire Line
+	2400 4350 2400 4300
+Connection ~ 2400 4300
+Wire Wire Line
+	2400 4300 2800 4300
+Wire Wire Line
+	2400 5050 2400 5200
+Wire Wire Line
+	2050 4300 2400 4300
+Wire Wire Line
+	2400 4700 2250 4700
+Wire Wire Line
+	2250 4700 2250 4500
+Wire Wire Line
+	2250 4500 2050 4500
+Connection ~ 2400 4700
+Wire Wire Line
+	2400 4700 2400 4650
+Wire Wire Line
+	2100 4750 2100 4700
+Wire Wire Line
+	2100 4700 2050 4700
+$Comp
+L mppcInterface-rescue:GND-power #PWR081
+U 1 1 5D98A742
+P 2100 5200
+F 0 "#PWR081" H 2100 4950 50  0001 C CNN
+F 1 "GND" H 2105 5027 50  0000 C CNN
+F 2 "" H 2100 5200 50  0001 C CNN
+F 3 "" H 2100 5200 50  0001 C CNN
+	1    2100 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2100 5050 2100 5200
 Wire Bus Line
 	8750 800  8750 4600
+$Comp
+L power:+4V #PWR083
+U 1 1 5D90CDFB
+P 2800 4200
+F 0 "#PWR083" H 2800 4050 50  0001 C CNN
+F 1 "+4V" H 2815 4373 50  0000 C CNN
+F 2 "" H 2800 4200 50  0001 C CNN
+F 3 "" H 2800 4200 50  0001 C CNN
+	1    2800 4200
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
