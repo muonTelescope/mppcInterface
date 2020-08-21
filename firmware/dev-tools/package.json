@@ -1,0 +1,13 @@
+{
+  "name": "dev-tools",
+  "version": "1.0.0",
+  "description": "Provides command line tools for testing muon telescope hardware",
+  "author": "Sawaiz Syed asyed5@gsu.edu",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm install"
+  },
+  "dependencies": {
+    "coincidence": "muonTelescope/coincidence"
+  }
+}

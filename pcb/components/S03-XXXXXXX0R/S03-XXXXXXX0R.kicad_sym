@@ -1,0 +1,43 @@
+(kicad_symbol_lib (version 20200126) (host kicad_symbol_editor "(5.99.0-2251-g5226d6b4d)")
+  (symbol "S03-XXXXXXX0R:S03-30100300R"
+    (property "Reference" "SH" (id 0) (at 5.08 -1.27 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "S03-30100300R" (id 1) (at 0 -6.35 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "S03-XXXXXXX0R:S03-30100300R" (id 2) (at 0 -11.43 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "${KIPRJMOD}/components/S03-XXXXXXX0R/S03-XXXXXXX0R.pdf" (id 3) (at 0 -13.97 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (symbol "S03-30100300R_0_1"
+      (arc (start -3.175 -4.171) (end 3.175 -4.171) (radius (at 0 -4.445) (length 3.1868) (angles 175.1 4.9))
+        (stroke (width 0.0006)) (fill (type none))
+      )
+      (polyline
+        (pts (xy -1.905 -3.175) (xy 1.905 -3.175))
+        (stroke (width 0.0006)) (fill (type none))
+      )
+      (polyline
+        (pts (xy -1.27 -3.81) (xy 1.27 -3.81))
+        (stroke (width 0.0006)) (fill (type none))
+      )
+      (polyline
+        (pts (xy -0.635 -4.445) (xy 0.635 -4.445))
+        (stroke (width 0.0006)) (fill (type none))
+      )
+      (polyline
+        (pts (xy 0 -3.175) (xy 0 0))
+        (stroke (width 0.0006)) (fill (type none))
+      )
+    )
+    (symbol "S03-30100300R_1_1"
+      (pin power_out line (at 0 0 270) (length 0) hide
+        (name "SHIELD" (effects (font (size 1.27 1.27))))
+        (number "1" (effects (font (size 1.27 1.27))))
+      )
+    )
+  )
+)

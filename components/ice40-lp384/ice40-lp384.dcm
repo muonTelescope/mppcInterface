@@ -1,9 +1,0 @@
-EESchema-DOCLIB  Version 2.0
-#
-$CMP ICE40-LP384-SG32
-D ICE40 LP IC FPGA 21 I/O 32QFN
-K LP Lattice ice40 
-F http://www.latticesemi.com/~/media/LatticeSemi/Documents/DataSheets/iCE/iCE40LPHXFamilyDataSheet.pdf
-$ENDCMP
-#
-#End Doc Library

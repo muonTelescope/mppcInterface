@@ -1,0 +1,4 @@
+*.bin
+*.o
+ice40
+main

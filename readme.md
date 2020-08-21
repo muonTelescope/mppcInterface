@@ -1,8 +1,148 @@
 # MPPC Interface
+
+
+This is a continuation of a long process, over five years at this point. It is also part of a much broader set of tools and parts that make up the Muon Telesecope.
+
+## Design
+
+## Hardware
+There are three main sections to the hardware. High voltage generation and control, Analog front end, and digital logic conatined in the FPGA.
+
+### Bias Voltage
+The MPPCs requre a bias of around 80V with very low ripple and high precision. The gain of the sensors varies with respect to the voltage put across them and even a deviation of 10mV has a significat impact on the gain. The gain is also a function of ambient temperature and the bias needs to be controlabe to within a mV to adjust the gain as temperature changes.
+
+[Gain vs Bias]
+[Gain Vs temp chart]
+
+The bias voltage is set though a top high voltage rail and a bottom DAC. This approach allows for a very high precision on the bottom dac along with the range on the top HV. With a 16b DAC, steps of under 100uV are possible, whcih is below the accuracy of most of the rest of the supply
+
+For example to set the voltage to 78.434 the top rail is set to its minimal on voltage to ensure there is never a risk of a forward bias (although with the HV off the output is at 4.5V, the input voltage save the shotky didode drop so the risk is only there if the dac is ser to near its max voltage which may still be below the conduction voltage of the MPPC), then the bottom rail can be set to 1.566V, followed by the HV rail being set to 80V providing a voltage diffreential of 78.434 across the sensor.
+
+#### HV Rail
+The top high voltage rail is created using Maxim's [MAX1932] APD bias boost converter. This IC provides a low ripple 5V input to 55V to 110V output (design configurable to 20V-100V) with 8b digital control over SPI and built in current limiting set at 2.5mA.
+
+Using a high amount of filtering on the inputs and outpurs, large bulk capacitors, a tight layout, EMC shields, and sectioned off ground and power planes, the output ripple as well as emitted noise is reduced significantly. The output ripple is well below 1mV.
+
+The voltage range, and step size is dictated with setting R2, R3, and R4. The minimum and maximum voltage set using the equations for on page 7 of the datasheet, and there are 8 bits (256) intermediate values that are possible. The high switching portion was designed with general SMPS design requirements (short high current loops, separated ground planes, EMI shielding) providing a low ripple output (<5mVpp ripple) and no significant back EMF.
+
+The Setting resistors are 0.01% and the chip provides a 0.5% accuracy which needs to be calibrated. The calibration and certification procedure is provided in another section of documention.
+
+[Table of set R values and the range they create]
+[Fucntion of byte to voltage with perfect resistors]
+
+#### Bottom DAC
+
+The "Bottom DAC" is the term used to describe the arrangement where the voltage supply at the anode of a reverse biased SiPM is used to "subtract" from the top bias voltage. It is implemented with a eight channel 16b [DAC80508] by Texas Instruments. This provides independent control with a 5V range for each of the eight chanels. 
+
+### Analog Front End
+The analog front end amplifier is also highly specilized. The design condierations to be considered are considerable and require specilized parts [MPPC AFE talk]. In the end the selection is a very high bandwidth low noise instrumentation amplifier with a 400x gain. The [OPA846] has a high slew rate of 625V/us and a gain bandwith product of 1.75Ghz providing a adequate bandwith of ~4.3Mhz with our gain. 
+
+The aplifier's input in coupled with a DC blocking capacitor and routed very tightly on a single layer to reduce noise and emissions that will easily be amplified with such a high gain. The gain of 400x is acivhed with a 20k and 50R positive feedback in a non-inverting configuration. The output is 
+
+#### Power supply
+Very stable +-5V rails are required for the analog front end to have have the low noise it needs.
+
+### Digital Logic
+
+## Firmware
+
+#### High Voltage
+The SPI bus is connected directly to the MAX1932. Chip select is active low and data is sent MSB (most significant bit first). Sending bytes to it sets the voltage. Setting them to 0x00 turns off the DC-DC converter portion. As values increase to 0xFF (256), the output voltage falls linearly.
+
+```Arduino
+//Example Arduino code that loops through all voltages.
+//SCLK --> Pin 13 for Uno or Duemilanove
+//DIN ---> Pin 11 for Uno or Duemilanove
+
+#include <SPI.h>
+#define CS 2 //Any pin
+
+void setup(){
+	Serial.begin(9600);
+	pinMode(CS, OUTPUT);
+	digitalWrite(CS, HIGH);
+	SPI.begin();
+	SPI.setBitOrder(MSBFIRST);
+}
+
+void loop(){
+	for(int i = 0 ; i < 256 ; i++){
+		digitalWrite(CS, LOW);
+		SPI.transfer(i);
+		digitalWrite(CS, HIGH);
+		Serial.println(i);
+	}
+}
+```
+
+## Gateware
+
+#### Flashing
+
+##### Clearing
+##### Burning
+##### File format
+
+##### Compilation
+###### Yosys
+###### AracnePNR
+
+
+## Absolute Maximum ratings
+## Gaurenteed Ratings
+## Manufacturing
+### BOM
+### PCB Assembly
+### Artwork
+### Labeling
+## Safety
+## Certifications
+## Licence
+## Attributions
+
+
+- HV Calibration procedure and certification.
+
+Glossary
+MPPC Multi pixel photon counter, Hamamtsu Photonics's 
+SiPM
+DAC
+Bias
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Old Version of docs
+
+
 A single assembled board breaks out singals and provides all the interfaces that 4 [MPPC Sesnor](https://github.com/Sawaiz/mppcSensor) boards need. The power to each module is supplied via the [MPPC high voltage](https://github.com/Sawaiz/mppcHighVoltage) modules
 attached board. It is able to be run independently for testing and debugging, or on a backplane with many others for more channels.
 
 ![][mppcInterfaceAssembly]
+
+
+## Expansion Format
+
+### SPI
+The SPI exapansion format is designed to be infinetly expandable up to the signal propgation length and capactive loading. 
+
+The Design of the SPI system is chained shift registers. The shift registers 
+
+SPI EEPROM lies on each expansion board and has the code needed to interface with it (this sounds beautiful, really).
+The EEPROM contains the device enumeration and drivers for all the 8 slots on its adress.
+Master downloads drivers 
+
+
+### I2C
 
 ## Hardware
 The board attaches directly to a Raspberry Pi using the centered GPIO headers. The Raspberry Pi is mounted to the board via four standoffs. It is a stand alone board requiring no backplane. This board can be mounted via the M5 screw holes around the edge.
@@ -24,19 +164,49 @@ The side of the board has a Arduino compatible ([ATmega328](http://www.atmel.com
 As all the ADC modules on the daughter boards have the same address, a 8 channel I2C switch ([TCA9548A](http://www.ti.com/lit/ds/symlink/tca9548a.pdf)) is used to communicate to them independently. The pins attached to it are referenced as master, as the microcontroller is acting as the master controlling it.
 
 
-### Pinout
-There are eight RJ-45 jacks on the edge of the board, each jack has the following pinout. The signal lines are kept on a single twisted pair so if a differential signal is used, higher signal integrity is maintained.
+## BOM
+The bill of materials is availible in [bom.csv](bom.csv) and is copied into a table below.
 
-|Pin# | Pin  | Signal        |
-| --- | ---- | ------------- |
-| 1   | MD0+ | High Voltage  |
-| 2   | MD0- | Ground        |
-| 3   | MD1+ | LED           |
-| 4   | MD1- | Thermistor    |
-| 5   | MD2+ | +3.3V         |
-| 6   | MD2- | -3.3V         |
-| 7   | MD3+ | Signal+       |
-| 8   | MD3- | Signal-       |
+| Ref Des                                                                                          | Qty | Manufacturer          | MPN                 | Description                      |
+| ------------------------------------------------------------------------------------------------ | ---:| --------------------- | ------------------- | -------------------------------- |
+| C1                                                                                               | 1   | Wuerth Elektronik     | 885012105011        | CAP CER 0.22UF 10V X5R 0402      |
+| C2                                                                                               | 1   | Wuerth Elektronik     | 885012208116        | CAP CER 0.047UF 100V X7R 1206    |
+| C3 C5 C7 C9 C11 C13 C15 C17                                                                      | 8   | Wuerth Elektronik     | 885012205016        | CAP CER 0.047UF 10V X7R 0402     |
+| C19                                                                                              | 1   | Samsung               | CL21B105KOFNNNG     | CAP CER 1UF 16V X7R 0805         |
+| C20                                                                                              | 1   | Samsung               | CL31B105KCHNNNE     | CAP CER 1UF 100V X7R 1206        |
+| C21                                                                                              | 1   | AVX                   | 22201C106MAT2A      | CAP CER 10UF 100V X7R 2220       |
+| C22 C24                                                                                          | 2   | Murata                | GRM155C80J106ME11D  | CAP CER 10UF 6.3V X6S 0402       |
+| C29 C28 C34 C33 C39 C38 C44 C43 C49 C48 C54 C53 C59 C58 C64 C63                                  | 16  | Wuerth Elektronik     | 885012105016        | CAP CER 0.1UF 16V X5R 0402       |
+| C23 C32 C31 C27 C26 C37 C41 C42 C36 C4 C25 C6 C30 C8 C35 C10 C40 C12 C45 C14 C50 C16 C55 C18 C60 | 25  | Samsung               | CL05A105MP5NNNC     | CAP CER 1UF 10V X5R 0402         |
+| C65                                                                                              | 1   | TDK                   | C1005X5R1A335M050BC | CAP CER 3.3UF 10V X5R 0402       |
+| R1                                                                                               | 1   | Stackpole Electronics | RMCF0402FT1M13      | RES 1.13M OHM 1% 1/16W 0402      |
+| R2                                                                                               | 1   | Stackpole Electronics | RMCF0402JT20R0      | RES 20 OHM 5% 1/16W 0402         |
+| R3                                                                                               | 1   | Yageo                 | RT0402BRD072K49L    | RES SMD 2.49KOHM 0.1% 1/16W 0402 |
+| R4                                                                                               | 1   | Yageo                 | RC0402FR-07806RL    | RES SMD 806 OHM 1% 1/16W 0402    |
+| R5                                                                                               | 1   | Yageo                 | RT0402BRD07100KL    | RES SMD 100K OHM 0.1% 1/16W 0402 |
+| R6                                                                                               | 1   | TE Connectivity       | CPF0402B23R7E1      | RES SMD 23.7 OHM 0.1% 1/16W 0402 |
+| R7 R12 R17 R22 R27 R32 R37 R42                                                                   | 8   | Yageo                 | RT0402DRE071KL      | RES SMD 1K OHM 0.5% 1/16W 0402   |
+| R8 R9 R13 R14 R18 R19 R23 R24 R28 R29 R33 R34 R38 R39 R43 R44                                    | 16  | Panasonic             | ERJ-2RKD49R9X       | RES SMD 49.9 OHM 0.5% 1/16W 0402 |
+| R10 R15 R20 R25 R30 R35 R40 R45                                                                  | 8   | Stackpole Electronics | RNCF0402DTE20K0     | RES 20K OHM 0.5% 1/16W 0402      |
+| R11                                                                                              | 1   | Stackpole Electronics | RMCF0402FT499K      | RES 499K OHM 1% 1/16W 0402       |
+| D2                                                                                               | 1   | ON Semiconductor      | FDLL4148            | DIODE GEN PURP 100V 200MA LL34   |
+| J1 J2 J3 J4 J5 J6 J7 J8                                                                          | 8   | Hirose                | U.FL-R-SMT-1(40)    | CONN U.FL RCPT STR 50 OHM SMD    |
+| J9                                                                                               | 1   | Sullins               | SFH11-PBPC-D20-ST-BK| CONN HDR 40POS 0.1 GOLD PCB      |
+| J10                                                                                              | 1   | FCI                   | 54601-906WPLF       | CONN MOD JACK 6P6C R/A UNSHLD    |
+| J11                                                                                              | 1   | Harwin                | M20-8760542         | CONN HEADER SMD 10POS 2.54MM     |
+| J12                                                                                              | 1   | FCI                   | 54602-908LF         | CONN MOD JACK 8P8C R/A UNSHLD    |
+| L1                                                                                               | 1   | Bourns                | SRN4018-151M        | FIXED IND 150UH 320MA 2.4 OHM    |
+| L2                                                                                               | 1   | Taiyo Yuden           | CBC3225T102KR       | FIXED IND 1MH 100MA 13 OHM SMD   |
+| Q1                                                                                               | 1   | ON Semiconductor      | BSS123L             | MOSFET N-CH 100V 0.17A SOT-23    |
+| U1                                                                                               | 1   | Texas Instruments     | DAC60508ZRTER       | IC DAC 12BIT V-OUT 16WQFN        |
+| U2                                                                                               | 1   | Microchip             | MIC5504-1.2YM5-TR   | IC REG LINEAR 1.2V 300MA SOT23-5 |
+| U3                                                                                               | 1   | Texas Instruments     | LM27761DSGR         | IC REG CHARGE PUMP ADJ 8WSON     |
+| U4                                                                                               | 1   | Nexperia              | 74HC595PW-112       | IC 8BIT SHIFT REGISTER 16TSSOP   |
+| U5                                                                                               | 1   | Maxim Integrated      | MAX1932ETC+T        | IC REG CTRLR FBR OPT 1OUT 12TQFN |
+| U6 U7 U8 U9 U10 U11 U12 U13                                                                      | 8   | Texas Instruments     | OPA846IDBVT         | IC OPAMP VFB 1 CIRCUIT SOT23-5   |
+| U14                                                                                              | 1   | Lattice Semiconductor | ICE40LP384-SG32     | IC FPGA 21 I/O 32QFN             |
+
+Aslo availible though [octopart](https://octopart.com/bom-tool/T0iNvVYe) 
 
 ![][mppcInterfaceBottomISO]
 

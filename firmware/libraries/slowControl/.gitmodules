@@ -1,0 +1,12 @@
+[submodule "shiftRegister"]
+	path = shiftRegister
+	url = git@github.com:muonTelescope/shiftRegister.git
+[submodule "max1932"]
+	path = max1932
+	url = git@github.com:muonTelescope/max1932.git
+[submodule "ice40"]
+	path = ice40
+	url = git@github.com:muonTelescope/ice40.git
+[submodule "dac60508"]
+	path = dac60508
+	url = git@github.com:muonTelescope/dac60508.git

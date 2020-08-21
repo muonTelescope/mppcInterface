@@ -1,0 +1,28 @@
+.dotfiles
+NTUSER.DAT*
+.ssh/id_rsa
+AppData
+Application Data
+Contacts
+Cookies
+Documents
+Downloads
+Favorites
+IntelGraphicsProfiles
+Links
+Local Settings
+Music
+My Documents
+NetHood
+Pictures
+PrintHood
+Recent
+Saved Games
+Searches
+SendTo
+Start Menu
+Templates
+Videos
+googleDrive
+ntuser.ini
+
