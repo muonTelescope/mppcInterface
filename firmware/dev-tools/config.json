@@ -1,0 +1,7 @@
+{
+    "gateware": "../coincidence.bin",
+    "logDir": "../data",
+    "hv": "0x92",
+    "bottomDac": ["0x7880", "0x8000", "0x0000", "0x0000", "0x0000", "0x0000", "0x0000", "0x0000"],
+    "tempSlope": [""]
+}

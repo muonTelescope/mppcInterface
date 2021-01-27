@@ -1,5 +1,5 @@
 # MPPC Interface
-
+A controller board for 
 
 This is a continuation of a long process, over five years at this point. It is also part of a much broader set of tools and parts that make up the Muon Telesecope.
 
@@ -9,7 +9,7 @@ This is a continuation of a long process, over five years at this point. It is a
 There are three main sections to the hardware. High voltage generation and control, Analog front end, and digital logic conatined in the FPGA.
 
 ### Bias Voltage
-The MPPCs requre a bias of around 80V with very low ripple and high precision. The gain of the sensors varies with respect to the voltage put across them and even a deviation of 10mV has a significat impact on the gain. The gain is also a function of ambient temperature and the bias needs to be controlabe to within a mV to adjust the gain as temperature changes.
+The MPPCs requre a bias of around 80V (varies greatly by model) with very low ripple and high precision. The gain of the sensors varies with respect to the voltage put across them and even a deviation of 10mV has a significat impact on the gain. The gain is also a function of ambient temperature and the bias needs to be controlabe to within a mV to adjust the gain as temperature changes.
 
 [Gain vs Bias]
 [Gain Vs temp chart]
@@ -37,14 +37,32 @@ The "Bottom DAC" is the term used to describe the arrangement where the voltage 
 ### Analog Front End
 The analog front end amplifier is also highly specilized. The design condierations to be considered are considerable and require specilized parts [MPPC AFE talk]. In the end the selection is a very high bandwidth low noise instrumentation amplifier with a 400x gain. The [OPA846] has a high slew rate of 625V/us and a gain bandwith product of 1.75Ghz providing a adequate bandwith of ~4.3Mhz with our gain. 
 
-The aplifier's input in coupled with a DC blocking capacitor and routed very tightly on a single layer to reduce noise and emissions that will easily be amplified with such a high gain. The gain of 400x is acivhed with a 20k and 50R positive feedback in a non-inverting configuration. The output is 
+[Outfput waveform]
+
+This provides waveforms from over xx photons to reach the 1.4V lower schmitt threadhold of the digital logic 3.3V/2-100mV. 
+
+[Photn and gain calculation]
+x photons needed * 40% efficency * 	1.7E6 * 1.602E-19C / nS?	
+
+The aplifier's input in coupled with a DC blocking capacitor and routed very tightly on a single layer to reduce noise and emissions that will easily be amplified with such a high gain. The gain of 400x is acivhed with a 20k and 50R positive feedback in a non-inverting configuration. The output is AC coupled to make sure the output has minimal capacitive loading especially since we are only looking for a hihg speed signal output.
+
+[Routing of AFE]
+
+#### Digital Logic
+The digital logic is done with a FPGA and can be reconfigured though gateware based on the detector configuration. The eight channels are connected to the GPIO and the schmitt inputs act as discriminators. The rest of the lines are run to three LEDs that can be used for indication and to the GPIO of the Raspberry Pi.
 
 #### Power supply
-Very stable +-5V rails are required for the analog front end to have have the low noise it needs.
+The general supply rails are provide dby the host Raspberry pi connector. The entire board uses about 1W across all the modules. The 5V supply, after some back EMF filtering is provided to the HV supply as well as the AFE power module. The 3.3V is used on the FPGA and the signaling Power supply of the DAC.
 
-### Digital Logic
+Very stable +-5V rails are required for the analog front end to have have the low noise it needs. The Analog \pm 5V is seperated to its own power planes and is hevily filtered and decoupled ensuring very little noise that would show amplifed on the output. This supply is generated thougha commerical module which is rated at a low ripple and switching frequency.
+
+A 1.2V linear regulator provides the core voltage to the FPGA.
+
+#### Mounting
+The hat is attached to the raspberry pi with four 2.6mm mounting holes form M2.5 screwas nad standoffs. A M2.5x11 standoff provides mounting and clearence. The size of the module is showin in the drawing below, it is the same sizing as a raspberry pi zero.
 
 ## Firmware
+This repository contains firmware in the form of C++ libraries that can be linked into your own code as well as a basic data logging application that sets up everything and logs the counts to a file. 
 
 #### High Voltage
 The SPI bus is connected directly to the MAX1932. Chip select is active low and data is sent MSB (most significant bit first). Sending bytes to it sets the voltage. Setting them to 0x00 turns off the DC-DC converter portion. As values increase to 0xFF (256), the output voltage falls linearly.
@@ -75,6 +93,13 @@ void loop(){
 }
 ```
 
+---
+In the config file the voltage is set for 25*. 
+
+
+#### DAC
+
+
 ## Gateware
 
 #### Flashing
@@ -93,6 +118,7 @@ void loop(){
 ## Manufacturing
 ### BOM
 ### PCB Assembly
+The board has three fiducials and 1.152mm tooling holes for automated assembly.
 ### Artwork
 ### Labeling
 ## Safety

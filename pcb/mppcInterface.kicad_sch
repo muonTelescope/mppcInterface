@@ -1911,11 +1911,11 @@
   (junction (at 267.97 161.29) (diameter 0) (color 0 0 0 0))
   (junction (at 267.97 168.91) (diameter 0) (color 0 0 0 0))
 
-  (no_connect (at 72.39 41.91))
+  (no_connect (at 154.94 55.88))
+  (no_connect (at 72.39 39.37))
   (no_connect (at 72.39 64.77))
   (no_connect (at 72.39 67.31))
-  (no_connect (at 72.39 39.37))
-  (no_connect (at 154.94 55.88))
+  (no_connect (at 72.39 41.91))
 
   (wire (pts (xy 27.94 138.43) (xy 30.48 138.43))
     (stroke (width 0) (type solid) (color 0 0 0 0))
