@@ -25,14 +25,6 @@ module top (
       
 
     reg [32:0] bootTimer = 0;
-    reg [9:0] ch0Counter = 0;
-    reg [9:0] ch1Counter = 0;
-    reg [9:0] ch2Counter = 0;
-    reg [9:0] ch3Counter = 0;
-    reg [9:0] ch4Counter = 0;
-    reg [9:0] ch5Counter = 0;
-    reg [9:0] ch6Counter = 0;
-    reg [9:0] ch7Counter = 0;
 
     wire CH0_R;
     wire CH1_R;
@@ -66,108 +58,55 @@ module top (
     always @(posedge CLK)
         bootTimer = bootTimer + 1;
 
-
     mppcInput CHANNEL0(
         .analogIn  (CH0),
         .booted    (booted),
         .digitalOut (CH0_R),
     );
-
-    SB_IO #(
-        .PIN_TYPE(6'b 1010_01),
-        .PULLUP(1'b 0)
-    ) Channel1(
-        .PACKAGE_PIN(CH1),
-        .OUTPUT_ENABLE(booted),
-        .D_OUT_0(1'b0),
-        .D_IN_0(CH1_R)
+    mppcInput CHANNEL1(
+        .analogIn  (CH1),
+        .booted    (booted),
+        .digitalOut (CH1_R),
+    );
+    mppcInput CHANNEL2(
+        .analogIn  (CH2),
+        .booted    (booted),
+        .digitalOut (CH2_R),
+    );
+    mppcInput CHANNEL3(
+        .analogIn  (CH3),
+        .booted    (booted),
+        .digitalOut (CH3_R),
+    );
+    mppcInput CHANNEL4(
+        .analogIn  (CH4),
+        .booted    (booted),
+        .digitalOut (CH4_R),
+    );
+    mppcInput CHANNEL5(
+        .analogIn  (CH5),
+        .booted    (booted),
+        .digitalOut (CH5_R),
+    );
+    mppcInput CHANNEL6(
+        .analogIn  (CH6),
+        .booted    (booted),
+        .digitalOut (CH6_R),
+    );
+    mppcInput CHANNEL7(
+        .analogIn  (CH7),
+        .booted    (booted),
+        .digitalOut (CH7_R),
     );
 
-    SB_IO #(
-        .PIN_TYPE(6'b 1010_01),
-        .PULLUP(1'b 0)
-    ) Channel2(
-        .PACKAGE_PIN(CH2),
-        .OUTPUT_ENABLE(booted),
-        .D_OUT_0(1'b0),
-        .D_IN_0(CH2_R)
+    dataOutput UART(
+        .clk     (clk),
+        .data    (8'b 1010_1010),
+        .dataOut (gpio17),
     );
+    
 
-    SB_IO #(
-        .PIN_TYPE(6'b 1010_01),
-        .PULLUP(1'b 0)
-    ) Channel3(
-        .PACKAGE_PIN(CH3),
-        .OUTPUT_ENABLE(booted),
-        .D_OUT_0(1'b0),
-        .D_IN_0(CH3_R)
-    );
-
-    SB_IO #(
-        .PIN_TYPE(6'b 1010_01),
-        .PULLUP(1'b 0)
-    ) Channel4(
-        .PACKAGE_PIN(CH4),
-        .OUTPUT_ENABLE(booted),
-        .D_OUT_0(1'b0),
-        .D_IN_0(CH4_R)
-    );
-
-    SB_IO #(
-        .PIN_TYPE(6'b 1010_01),
-        .PULLUP(1'b 0)
-    ) Channel5(
-        .PACKAGE_PIN(CH5),
-        .OUTPUT_ENABLE(booted),
-        .D_OUT_0(1'b0),
-        .D_IN_0(CH5_R)
-    );
-
-    SB_IO #(
-        .PIN_TYPE(6'b 1010_01),
-        .PULLUP(1'b 0)
-    ) Channel6(
-        .PACKAGE_PIN(CH6),
-        .OUTPUT_ENABLE(booted),
-        .D_OUT_0(1'b0),
-        .D_IN_0(CH6_R)
-    );
-
-    SB_IO #(
-        .PIN_TYPE(6'b 1010_01),
-        .PULLUP(1'b 0)
-    ) Channel7(
-        .PACKAGE_PIN(CH7),
-        .OUTPUT_ENABLE(booted),
-        .D_OUT_0(1'b0),
-        .D_IN_0(CH7_R)
-    );
-
-    always @(posedge CH0_R)
-        ch0Counter = ch0Counter + 1;
-
-    always @(posedge CH1_R)
-        ch1Counter = ch1Counter + 1;
-
-    always @(posedge CH2_R)
-        ch2Counter = ch2Counter + 1;
-
-    always @(posedge CH3_R)
-        ch3Counter = ch3Counter + 1;
-
-    always @(posedge CH4_R)
-        ch4Counter = ch4Counter + 1;
-
-    always @(posedge CH5_R)
-        ch5Counter = ch5Counter + 1;
-
-    always @(posedge CH6_R)
-        ch6Counter = ch6Counter + 1;
-
-    always @(posedge CH7_R)
-        ch7Counter = ch7Counter + 1;
-
-    assign gpio17 = CH0_R;
+    // assign gpio17 = CH0_R;
     assign gpio18 = CH1_R;
     assign gpio27 = CH0_R && CH1_R;
     assign LED0 = bootTimer[24];
