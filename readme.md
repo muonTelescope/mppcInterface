@@ -1,4 +1,79 @@
+[headerIMG]
+
 # MPPC Interface
+Measuring and logging photon level light sources is a large part of high energy physics instrumentaiton. This board was created to power and collect data from eight MPPC (Multi Pixel photon counters) or SiPM (Silicon Photomultiplers). Provide coincidence logic and log the data out to a Raspberry Pi.
+
+[img]
+
+This is the main conntroller board of the muon telescope project. This board aimts to replace the current tools used
+
+This is the technical manual for anyone wanting to modify, hack, remix, or program their own SiPM readout. The manual goes into fine detail about construction, assembly, and firmware which should encompass all basic knowledge.
+
+## TOC
+
+
+## Design
+THe design was based off a combiniation of topologies from [sPhenix] design, our previous hardware iterations, and new needs in this version. The MPPCs need a very stable high voltage bias voltage that can be controled over this range in sub-milivolt steps. 
+
+[topologyDiagarm]
+
+This is done thoug hthe top high voltage being controalbe in 1V steps and is common across all eight chanels and a eight channel bottom DAC that provides a controlable virtual ground seperately for each channel.
+
+The anode signal is then sent though a high amplification instrumentation amplifier and then sent to the FPGA's schmitt inputs. The conicidence logic is then done in the FPGA and its outputs are mapped to interupt vectors on the host machine.
+
+
+### Components
+Component selection was built off previous verisons, and the specific use case  of driving [Hamamtsu]'s MPPCs. The major ICs and other unique componets will be descibed below.
+
+#### High Voltage Boost
+*Maxim Semiconducr's* [MAX1932] has proven itself with proper layout in pervious interations of the design to provide a stable, controlable, low ripple high voltage for avalanche photodidoes. 
+
+THe chip interanlly has a boost controller, current sensing for a current limit, and a 8b DAC that can be tied in to set the voltage over SPI.
+
+#### Bottom DAC
+The other half of the bias voltage is handled by the *Texas Instument* [DAC60508] 8 channel 12b (with a direct drop in replace for up to 16b) digital to analog converter. The linear regulation inside provides a stable output, and using the internal `2.5 V` precsion refrence LSB steps of `0.6 mV` are achived. THe output is highly linear and monotonic. 
+
+The power consuption is also low at `0.6mA/ch` for future power constrained applicaitons.
+
+
+
+
+### Schematic
+### Layout
+### Mechanics
+
+## Firmware
+### High Voltage
+### Bottom DAC
+### FPGA burning
+### Compiling
+### Flashing
+
+## Gateware
+### Pin connections
+### Logic
+### Compiling
+### Flashing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 A controller board for 
 
 This is a continuation of a long process, over five years at this point. It is also part of a much broader set of tools and parts that make up the Muon Telesecope.

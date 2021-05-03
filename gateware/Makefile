@@ -5,7 +5,7 @@ DEVICE    = 384
 FOOTPRINT = qn32
 
 # Files
-FILES = top.v
+FILES = top.v mppcInput.v
 
 .PHONY: all clean burn
 

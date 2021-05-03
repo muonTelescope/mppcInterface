@@ -33,6 +33,15 @@ using namespace std;
 #define DONE_PIN 5
 #define SPI_CHANNEL 0
 
+char inbuf[10][10];
+uint16_t settings[10];
+char gateware[100];
+
+FILE * fp;
+fp = fopen ("config.txt", "r");
+fscanf("%s %x\n", &inbuf[0], &val);
+fclose(fp);
+
 
 
 //Global counters

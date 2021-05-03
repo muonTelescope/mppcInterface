@@ -1,3 +1,4 @@
 .internal
 desktop.ini
 pcb/*-backups
+pcb/*.kicad_prl

@@ -1,0 +1,12 @@
+hv  0xEF
+ch0 0xABCD
+ch1 0xABCD
+ch2 0xABCD
+ch3 0xABCD
+ch4 0xABCD
+ch5 0xABCD
+ch6 0xABCD
+ch7 0xABCD
+dV0 0.0054
+dV1 0.0054
+bin ../../../gateware/build/coincidence.bin

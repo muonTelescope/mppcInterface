@@ -29,14 +29,6 @@ cd arachne-pnr
 make -j$(nproc)
 make install
 
-# Intall NEXT PNR
-cd /tmp
-git clone https://github.com/YosysHQ/nextpnr nextpnr
-cd nextpnr
-cmake -DARCH=ice40 -DCMAKE_INSTALL_PREFIX=/usr/local .
-make -j$(nproc)
-make install
-
 # Install Yosys
 cd /tmp
 git clone https://github.com/cliffordwolf/yosys.git yosys
