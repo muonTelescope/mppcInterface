@@ -22,7 +22,7 @@ ICE40::ICE40(const uint8_t CS_PIN, const uint8_t DONE_PIN, const uint8_t RST_PIN
 
 void ICE40::setup(const uint8_t SPI_CHANNEL, const uint32_t clkSpeed){
     // Initilize wiring pi libray
-  wiringPiSetup () ;
+  wiringPiSetup ();
   // SPI Mode 3, CPOL=1 CPHA=1, Clock Idle High, Sample on rising edge
   wiringPiSPISetupMode(_SPI_CHANNEL, clkSpeed, 3);
 

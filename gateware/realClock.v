@@ -1,8 +1,8 @@
 module dataOutput (
     input CLK,
-    input [7:0] data,
-    output clockOut,
-    output dataOut,
+    output ms,
+    output sec,
+    output min,
 );
 
 reg [12:0] timer0;     // At 9.6Mhz, 1ms is 9600 cycles, fits in 2^13
@@ -31,15 +31,8 @@ begin
     end
 end
 
-reg[3:0] currentBit;
-always @(posedge CLK)
-begin
-    currentBit = currentBit + 1;
-end
-
-assign dataOut = timer2[0];
-// assign dataOut = data[currentBit];
-assign clockOut = minute;
-// assign clockOut = currentBit[0];
+assign ms  = timer1[0];
+assign sec = timer2[0];
+assign min = minute[0];
 
 endmodule

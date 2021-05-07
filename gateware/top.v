@@ -99,15 +99,31 @@ module top (
         .digitalOut (CH7_R),
     );
 
-    dataOutput UART(
-        .clk     (clk),
-        .data    (8'b 1010_1010),
-        .dataOut (gpio17),
+    wire testGPIO;
+
+    //dataOutput UART(
+    //    .CLK      (CLK),
+    //    .data     (8'b 1010_1111),
+    //    .clockOut (gpio18),
+    //    .dataOut  (gpio17),
+    //);
+
+    module dataOutput (
+        .CLK  (CLK),
+    );
+
+    uart UART0(
+        .uart_busy    (gpio18), 
+        .uart_tx      (gpio17),   
+        .uart_wr_i    (booted),
+        .uart_dat_i   (8'b10100001),
+        .sys_clk_i    (CLK), 
+        .sys_rst_i    (!booted),  
     );
     
 
-    // assign gpio17 = CH0_R;
-    assign gpio18 = CH1_R;
+    // assign gpio17 = testGPIO;
+    // assign gpio18 = CH1_R;
     assign gpio27 = CH0_R && CH1_R;
     assign LED0 = bootTimer[24];
     assign LED1 = bootTimer[23];

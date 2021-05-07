@@ -5,7 +5,7 @@ DEVICE    = 384
 FOOTPRINT = qn32
 
 # Files
-FILES = top.v mppcInput.v dataOutput.v
+FILES = top.v mppcInput.v dataOutput.v uart.v
 
 .PHONY: all clean burn
 
@@ -19,9 +19,9 @@ all:
 	# Convert to bitstream using IcePack
 	icepack $(BUILD)/$(PROJ).asc $(BUILD)/$(PROJ).bin
 
-burn: 
+burn:
 	# iceprog $(BUILD)/$(PROJ).bin
-	../ice40/ice40 $(BUILD)/$(PROJ).bin
+	../firmware/libraries/ice40/main $(BUILD)/$(PROJ).bin
 
 clean:
 	rm build/*
