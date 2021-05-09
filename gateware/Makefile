@@ -5,7 +5,7 @@ DEVICE    = 384
 FOOTPRINT = qn32
 
 # Files
-FILES = top.v mppcInput.v dataOutput.v uart.v
+FILES = top.v mppcInput.v uart.v realClock.v
 
 .PHONY: all clean burn
 
