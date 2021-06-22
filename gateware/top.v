@@ -22,19 +22,13 @@ module top (
     output gpio18,  
     output gpio17,
         );
-      
-
-    reg [32:0] bootTimer = 0;
 
     wire CH0_R;
     wire CH1_R;
     wire CH2_R;
     wire CH3_R;
-    wire CH4_R;
-    wire CH5_R;
-    wire CH6_R;
-    wire CH7_R;
-
+    reg [7:0] eventCount [7:0];
+    reg [3:0] eventSel;
 
     // Just after boot, the inputs need to be pulled low
     // to discharge the capacitors on thier output
@@ -49,7 +43,7 @@ module top (
             end else begin
                 // Else set as output pulled down
                 // Increment
-                bootTimeout <= bootTimeout + 1;            
+                bootTimeout <= bootTimeout + 1;       
             end
         end
     end
@@ -59,75 +53,68 @@ module top (
         bootTimer = bootTimer + 1;
 
     mppcInput CHANNEL0(
-        .analogIn  (CH0),
-        .booted    (booted),
+        .analogIn   (CH0),
+        .booted     (booted),
         .digitalOut (CH0_R),
+        .counter    (eventCount[0]),
     );
     mppcInput CHANNEL1(
         .analogIn  (CH1),
         .booted    (booted),
         .digitalOut (CH1_R),
+        .counter    (eventCount[1]),
     );
     mppcInput CHANNEL2(
         .analogIn  (CH2),
         .booted    (booted),
         .digitalOut (CH2_R),
+        .counter    (eventCount[2]),
     );
     mppcInput CHANNEL3(
         .analogIn  (CH3),
         .booted    (booted),
         .digitalOut (CH3_R),
-    );
-    mppcInput CHANNEL4(
-        .analogIn  (CH4),
-        .booted    (booted),
-        .digitalOut (CH4_R),
-    );
-    mppcInput CHANNEL5(
-        .analogIn  (CH5),
-        .booted    (booted),
-        .digitalOut (CH5_R),
-    );
-    mppcInput CHANNEL6(
-        .analogIn  (CH6),
-        .booted    (booted),
-        .digitalOut (CH6_R),
-    );
-    mppcInput CHANNEL7(
-        .analogIn  (CH7),
-        .booted    (booted),
-        .digitalOut (CH7_R),
+        .counter    (eventCount[3]),
     );
 
-    wire testGPIO;
-
-    //dataOutput UART(
-    //    .CLK      (CLK),
-    //    .data     (8'b 1010_1111),
-    //    .clockOut (gpio18),
-    //    .dataOut  (gpio17),
-    //);
-
-    module dataOutput (
-        .CLK  (CLK),
+    wire minPul;
+    realClock real0(
+        .CLK    (CLK),
+        .minPul (minPul),
     );
 
+    reg uartBusy;
+    wire [7:0] data;
+    wire retransmit;
     uart UART0(
-        .uart_busy    (gpio18), 
+        .uart_busy    (uartBusy), 
         .uart_tx      (gpio17),   
-        .uart_wr_i    (booted),
-        .uart_dat_i   (8'b10100001),
+        .uart_wr_i    (minPul | retransmit),
+        .uart_dat_i   (data),
         .sys_clk_i    (CLK), 
         .sys_rst_i    (!booted),  
     );
-    
 
-    // assign gpio17 = testGPIO;
-    // assign gpio18 = CH1_R;
-    assign gpio27 = CH0_R && CH1_R;
-    assign LED0 = bootTimer[24];
-    assign LED1 = bootTimer[23];
-    assign LED2 = bootTimer[22];
+    always @(negedge uartBusy) begin
+        if(eventSel == 7) begin
+            retransmit = 0;
+            eventSel = 0;    
+            eventCount[4] <= eventCount[4] + 1;
+        end else begin
+            data = eventCount[eventSel];
+            eventSel <= eventSel + 1;
+            retransmit = 1; 
+        end
+    end
+
+    // wire CH01;
+    // assign CH01 = CH0_R && CH1_R;
+    // always @(posedge CH01) begin
+    //     eventCount[4] = eventCount[4] + 1;
+    // end
+    // assign LED0 = bootTimeout[10];
+    // assign LED1 = bootTimeout[10];
+    // assign LED2 = bootTimeout[10];
     // assign gpioSDI  = CH0 && CH2;
     // assign gpioSCK  = CH0 && CH1 && CH2;
     // assign gpioSS   = CH3 && CH4;

@@ -2,11 +2,9 @@ module mppcInput (
     input analogIn,
     input booted,
     output digitalOut,
-    output [11:0] counter
+    input counter,
 );
 
-reg [11:0] counter;
-    
 // Use hardmacro block for pin initializtion
 SB_IO #(
     .PIN_TYPE(6'b 1010_01),
