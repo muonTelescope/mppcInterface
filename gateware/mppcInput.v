@@ -2,7 +2,7 @@ module mppcInput (
     input analogIn,
     input booted,
     output digitalOut,
-    input counter,
+    output [15:0] counter,
 );
 
 // Use hardmacro block for pin initializtion
