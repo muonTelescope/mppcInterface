@@ -10,13 +10,13 @@ module top (
     input CH6,
     input CH7,
     input CLK,  
-    output gpioSDO,
-    output gpioSDI,
-    output gpioSCK,
+    input gpioSDO,
+    input gpioSDI,
+    input gpioSCK,
+    input gpioSS,
     output LED0,
     output LED1,
     output LED2,
-    output gpioSS,
     output gpio27,  
     output gpio23,  
     output gpio18,  
@@ -27,8 +27,10 @@ module top (
     wire CH1_R;
     wire CH2_R;
     wire CH3_R;
-    reg [7:0] eventCount [7:0];
+    reg [7:0] eventCount [15:0];
     reg [3:0] eventSel;
+    reg sendingByte;
+    reg [24:0] bootTimer = 0;
 
     // Just after boot, the inputs need to be pulled low
     // to discharge the capacitors on thier output
@@ -77,10 +79,10 @@ module top (
         .counter    (eventCount[3]),
     );
 
-    wire minPul;
+    wire pulse;
     realClock real0(
         .CLK    (CLK),
-        .minPul (minPul),
+        .secPulse (pulse),
     );
 
     reg uartBusy;
@@ -89,36 +91,59 @@ module top (
     uart UART0(
         .uart_busy    (uartBusy), 
         .uart_tx      (gpio17),   
-        .uart_wr_i    (minPul | retransmit),
+        .uart_wr_i    (pulse | retransmit),
         .uart_dat_i   (data),
         .sys_clk_i    (CLK), 
         .sys_rst_i    (!booted),  
     );
 
-    always @(negedge uartBusy) begin
-        if(eventSel == 7) begin
-            retransmit = 0;
-            eventSel = 0;    
-            eventCount[4] <= eventCount[4] + 1;
-        end else begin
-            data = eventCount[eventSel];
-            eventSel <= eventSel + 1;
-            retransmit = 1; 
-        end
-    end
+
+    // Use SPI pins (MOSI, MISO, CLK) to select channel data to send, 3b MUX
+    // assign data = eventCount[{gpioSDO, gpioSDI, gpioSCK}];
+    assign data = eventCount[0];
+
+
+    // always @(negedge uartBusy) begin
+    //     retransmit = 0;
+    //     if(sendingByte == 0) begin
+    //         retransmit = 0;
+    //     end else begin
+    //         data = eventCount[eventSel];
+    //         sendingByte = ~sendingByte;
+    //         retransmit = 1; 
+    //     end
+    // end
+
+    // always @(posedge CH0_R) begin
+    //     eventCount[0] = eventCount[0] + 1;
+    // end
+
+    // always @(CH1_R && CH2_R) begin
+    //     eventCount[6] = eventCount[6]+1;
+    // end
 
     // wire CH01;
     // assign CH01 = CH0_R && CH1_R;
     // always @(posedge CH01) begin
     //     eventCount[4] = eventCount[4] + 1;
     // end
-    // assign LED0 = bootTimeout[10];
-    // assign LED1 = bootTimeout[10];
-    // assign LED2 = bootTimeout[10];
+    assign LED0 = bootTimer[21];
+    assign LED1 = bootTimer[22];
+    assign LED2 = bootTimer[23];
     // assign gpioSDI  = CH0 && CH2;
     // assign gpioSCK  = CH0 && CH1 && CH2;
     // assign gpioSS   = CH3 && CH4;
     // assign gpio01   = CH0 && CH1 && CH2 && CH3 && CH4;
+    
+    assign gpio23 = CH0_R && CH1_R;
+    // assign gpio27 = CH1_R && CH2_R;
+    // assign gpio18 = CH0_R && CH2_R;
+
+    assign gpio27 = CH0_R;
+    assign gpio18 = CH1_R;
+
+    // SPI Pins as MUX for counting
+    
 
 endmodule
 

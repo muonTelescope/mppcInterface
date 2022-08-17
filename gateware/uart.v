@@ -17,7 +17,7 @@ module uart(
   // sys_clk_i is 9.6MHz.  We want a 115200Hz clock
 
   reg [28:0] d;
-  wire [28:0] dInc = d[28] ? (4800) : (4800 - 9600000);
+  wire [28:0] dInc = d[28] ? (115200) : (115200 - 9600000);
   wire [28:0] dNxt = d + dInc;
   always @(posedge sys_clk_i)
   begin
