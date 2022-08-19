@@ -56,6 +56,89 @@ The power consuption is also low at `0.6mA/ch` for future power constrained appl
 ### Flashing
 
 
+## Setup
+Download and flash a copy of the [Raspberry Pi OS](https://www.raspberrypi.com/software/) using either `dd` or the *Raspberry Pi imager* software.
+
+### Raspberry Pi imager
+Select the Raspberry Pi OS Lite and in advanced configuration menu (CTRL+SHIFT+X) enable ssh and add the WiFi credentials if the device will be connected over wireless network.
+
+
+This video also shows using the software to flash a SD card [How to use Raspberry Pi Imager](https://www.youtube.com/watch?v=ntaXWS8Lk34)
+
+
+### Advanced install with `dd`
+Be very careful using `dd` to copy the image to the SD card. `dd` is a direct bit copy from the imput file to the output file and will indescriminately write over any drives without any checks or protection.
+
+```bash
+df -h
+sudo umount sdx
+sudo dd bs=4M if=<imgPath.img> of=/dev/sdx
+```
+
+Enable ssh by creating a blank `ssh` file in the root directory called *boot*.
+```bash
+cd boot
+touch ssh
+```
+
+To setup connectingto WiFi on boot, a `/boot/wpa_supplicant.conf` file is created that is automatically copied over to `/etc/wpa_supplicant/wpa_supplicant.conf` on the next boot. 
+
+```bash
+nano /boot/wpa_supplicant.conf
+```
+
+And add in the relevant configuration.
+
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+country=<Insert 2 letter ISO 3166-1 country code here>
+update_config=1
+
+network={
+ ssid="<Name of your wireless LAN>"
+ psk="<Password for your wireless LAN>"
+}
+```
+
+Insert the SD card into the Raspberry Pi, connect the ethernet cable (if connecting over wired network), and power (unless connecting though POE) and connect to the device using ssh.
+
+You can figure out the IP address in several ways on linux you can use `nmap` or `arp` to search for the Raspberry Pi foundation's OUID (`DC:A6:32` for Raspberry Pi 4, `B8:27:EB` otherwise) on your local subnet. 
+
+```bash
+nmap -sP 192.168.1.0/24 | awk '/^Nmap/{ip=$NF}/B8:27:EB/{print ip}'
+```
+
+```bash
+arp -na | grep -i b8:27:eb
+```
+
+For Windows
+```cmd
+arp -a | findstr b8-27-eb
+```
+
+It is also possible to ping a new install with the default hostname if DNS or the bonjour service has the device in its tables.
+
+```bash
+ping raspi
+```
+
+### Bootstrap
+The setup script in the root directory can be run to set up a Raspberry pi from scratch. 
+
+```bash
+git clone https://github.com/muonTelescope/mppcInterface.git
+cd mppcInterface
+```
+
+The root directory includes a setup script that updates the operationg system, sets up accounts, installs the toolchain, and enables all required modules. On cloning th repository on the Raspberry Pi, this file shoud be made executable and run.
+
+```bash
+chmod +x setup.sh
+sudo ./setup.sh
+```
+
+expand filwsystem, not needed as pi does it on boot now.
 
 
 
@@ -66,12 +149,65 @@ The power consuption is also low at `0.6mA/ch` for future power constrained appl
 
 
 
+channelSelect.sh
+```bash
+#!/bin/bash
 
+dtparam spi=off
 
+gpio mode 6  out  # CS_DAC
+gpio mode 23 out  # CS_MAX1932
+gpio mode 5  out  # CS_FPGA
 
+gpio write 6  1
+gpio write 23 1
+gpio write 5  1
 
+sleep 2
 
+gpio mode 12 out # MOSI
+gpio mode 13 out # MISO
+gpio mode 14 out # SCK
 
+gpio write 12 $1
+gpio write 13 $2
+gpio write 14 $3
+
+sleep 2
+#rmmod spi_bcm2835
+#modprobe spi_bcm2835
+
+dtparam spi=on
+```
+
+softwareSerial read python
+```python
+import sys
+import time
+import difflib
+import pigpio
+import datetime
+import binascii
+
+RX=17
+
+try:
+        pi = pigpio.pi()
+        pi.set_mode(RX, pigpio.INPUT)
+        pi.bb_serial_read_open(RX, 115200, 8)
+
+        print "DATA - SOFTWARE SERIAL:"
+        while 1:
+                (count, data) = pi.bb_serial_read(RX)
+                if count:
+			print str(datetime.datetime.now()) + " " +  str(binascii.hexlify(data))
+                time.sleep(0.5)
+
+except Exception as e:
+	print(e)
+        pi.bb_serial_read_close(RX)
+        pi.stop()
+```
 
 
 A controller board for 
