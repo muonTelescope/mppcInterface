@@ -8,10 +8,12 @@ OBJECTS = main.o dac60508.o
 default: main
 
 main: $(OBJECTS)
-	$(CXX) -o $@ $(LDLIBS) $^
+	$(CXX) $(CXXFLAGS) $^ $(LDLIBS) -o $@
 
 %.o: ./%.cpp
-	$(CXX) -c $< $(CXXFLAGS)
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+$(OBJECTS): $(HEADERS)
 
 clean:
 	-rm -f $(OBJECTS)

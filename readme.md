@@ -126,6 +126,12 @@ ping raspi
 ### Bootstrap
 The setup script in the root directory can be run to set up a Raspberry pi from scratch. 
 
+Connect to the raspberry pi using the IP adress found.
+```bash
+ssh pi@192.168.1.*
+sudo apt install -y git
+```
+
 ```bash
 git clone https://github.com/muonTelescope/mppcInterface.git
 cd mppcInterface
@@ -147,7 +153,10 @@ expand filwsystem, not needed as pi does it on boot now.
 
 
 
-
+get mac adress to set hostname
+```bash
+cat /sys/class/net/eth0/address | cut -d: -f4- | sed 's/://g' | tr [:lower:] [:upper:]
+```
 
 channelSelect.sh
 ```bash

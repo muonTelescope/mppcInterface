@@ -1,6 +1,8 @@
 #!/bin/bash
 # 2019-03-11 Sawaiz, XHE
 # 2022-08-19 Sawaiz: added FPGA, GPS, UPS tools, and automated I2C, SPI, and UART
+#                    Automatically set hostname, generate swapfile for building fpga
+#                    tools, Tested-xxxx-xx-xx
 # Setup, install requirements
 
 # Exit if any errors occour
@@ -12,7 +14,6 @@ if [[ $(id -u) -ne 0 ]]; then
   exit
 fi
 
-read -e -p "Change hostname to: " host
 read -e -s -p "Change Root (pi) Password to: " rootPasswd
 echo ""
 read -e -p "Add User, Username: " userName
@@ -21,6 +22,9 @@ echo ""
 
 #Change root (pi) password
 echo "pi:$rootPasswd" | chpasswd
+
+# Generate hostname, muonTelescope-<last three octets of eth0 MAC adress>
+host=muonTelescope-`cat /sys/class/net/eth0/address | cut -d: -f4- | sed 's/://g' | tr [:lower:] [:upper:]`
 
 #Assign existing hostname to $hostn
 hostn=$(cat /etc/hostname)
@@ -33,17 +37,31 @@ sudo sed -i "s/$hostn/$host/g" /etc/hostname
 useradd -m -G sudo $userName
 echo "$userName:$userPasswd" | chpasswd
 
+# Increase swap size, 1GB ram is not enough to complile some FPGA tools, 1GB pi needs 4GB!
+dphys-swapfile swapoff
+sed -i "s/CONF_SWAPSIZE=100/CONF_SWAPSIZE=2048/g" /etc/dphys-swapfile
+sed -i "s/#CONF_MAXSWAP=2048/CONF_MAXSWAP=4096/g" /etc/dphys-swapfile
+dphys-swapfile setup
+dphys-swapfile swapon
+
+# Or create a temp swap file perhaps?
+#sudo dd if=/dev/zero of=/swapfile1GB bs=1M count=1024
+#sudo mkswap /swapfile1GB
+#sudo swapon /swapfile1GB
+
 #Update/upgrade
 apt update && apt -y full-upgrade
 
 # Add dev and required packages
-apt install -y gcc make build-essential git
+apt install -y gcc make build-essential git tmux
 
 # Install wiringPi
-apt install -y wiringpi
+wget https://github.com/WiringPi/WiringPi/releases/download/2.61-1/wiringpi-2.61-1-arm64.deb
+apt install -y ./wiringpi-2.61-1-arm64.deb
 
 # Install FPGA tools prerequisites
-sudo apt-get install build-essential clang bison flex libreadline-dev \
+# Some of these may be unnecessary if not installing nextpnr, needs to be culled
+sudo apt install -y  build-essential clang bison flex libreadline-dev \
                      gawk tcl-dev libffi-dev git mercurial graphviz   \
                      xdot pkg-config python python3 libftdi-dev \
                      qt5-default python3-dev libboost-all-dev cmake libeigen3-dev
@@ -61,14 +79,6 @@ git clone https://github.com/cseed/arachne-pnr.git arachne-pnr
 cd arachne-pnr
 make -j$(nproc)
 sudo make install
-
-# nextpnr, unable to build on Raspberry Pi
-#cd /tmp
-#git clone https://github.com/YosysHQ/nextpnr.git
-#cd nextpnr
-#cmake -DARCH=ice40 -DBUILD_GUI=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .
-#make -j$(nproc)
-#sudo make install
 
 # Yosys
 cd /tmp
@@ -88,6 +98,7 @@ if [ -f /etc/modprobe.d/raspi-blacklist.conf ]; then
   sed -i 's/^blacklist spi-bcm2708/#blacklist spi-bcm2708/' /etc/modprobe.d/raspi-blacklist.conf
 else
   echo 'File raspi-blacklist.conf does not exist, skip this step.'
+fi
 
 # enable I2C
 if grep -q 'dtparam=i2c1=on' /boot/config.txt; then
@@ -108,7 +119,7 @@ fi
 
 
 # install LiFePO4wered+ library, UPS management software
-apt get install -y libsystemd-dev
+apt install -y libsystemd-dev
 cd /tmp
 git clone https://github.com/xorbit/LiFePO4wered-Pi.git
 cd LiFePO4wered-Pi/
