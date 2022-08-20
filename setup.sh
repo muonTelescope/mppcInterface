@@ -20,6 +20,9 @@ read -e -p "Add User, Username: " userName
 read -e -s -p "$userName Password: " userPasswd
 echo ""
 
+# Reset timer to read length of install script
+SECONDS=0
+
 #Change root (pi) password
 echo "pi:$rootPasswd" | chpasswd
 
@@ -39,7 +42,7 @@ echo "$userName:$userPasswd" | chpasswd
 
 # Increase swap size, 1GB ram is not enough to complile some FPGA tools, 1GB pi needs 4GB!
 dphys-swapfile swapoff
-sed -i "s/CONF_SWAPSIZE=100/CONF_SWAPSIZE=2048/g" /etc/dphys-swapfile
+sed -i "s/CONF_SWAPSIZE=100/CONF_SWAPSIZE=4096/g" /etc/dphys-swapfile
 sed -i "s/#CONF_MAXSWAP=2048/CONF_MAXSWAP=4096/g" /etc/dphys-swapfile
 dphys-swapfile setup
 dphys-swapfile swapon
@@ -56,6 +59,7 @@ apt update && apt -y full-upgrade
 apt install -y gcc make build-essential git tmux
 
 # Install wiringPi
+cd /tmp
 wget https://github.com/WiringPi/WiringPi/releases/download/2.61-1/wiringpi-2.61-1-arm64.deb
 apt install -y ./wiringpi-2.61-1-arm64.deb
 
@@ -64,7 +68,7 @@ apt install -y ./wiringpi-2.61-1-arm64.deb
 sudo apt install -y  build-essential clang bison flex libreadline-dev \
                      gawk tcl-dev libffi-dev git mercurial graphviz   \
                      xdot pkg-config python python3 libftdi-dev \
-                     qt5-default python3-dev libboost-all-dev cmake libeigen3-dev
+                     python3-dev libboost-all-dev cmake libeigen3-dev
 
 # IceStorm Tools
 cd /tmp
@@ -131,5 +135,6 @@ make user-install
 # You can use gpsmon or cgps to view GPS data.
 sudo apt-get install gpsd-clients gpsd -y
 sudo sed -i 's/DEVICES=""/DEVICES="\/dev\/serial0"/g' /etc/default/gpsd 
+stty -F /dev/serial0 9600
 
-echo "Finished, reboot to implement changes."
+echo "Finished in $((SECONDS/3600))h $(((SECONDS/60)%60))m $((SECONDS%60))s, reboot to implement changes."
