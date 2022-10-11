@@ -24,13 +24,14 @@ bool DAC60508::begin(uint8_t CS_PIN, uint8_t SPI_CHANNEL){
   // Are these two next lines needed?
   delay (500);
   write(DAC60508_NOP, 0x0000);
+  return 0;
 }
 
 // Read DAC channel in milivolts
 float DAC60508::readmVDAC(uint8_t channel){
   float val;
   // Convert from bits to voltage
-  val = refV * (readDAC(channel) / 1<<16);
+  val =  refV * readDAC(channel) / (1<<16);
   // Apply refrence dividor
   if(refDiv){
     val *= 0.5;
@@ -52,6 +53,7 @@ float DAC60508::readmVDAC(uint8_t channel){
 bool DAC60508::setDAC(uint8_t channel, uint16_t value){
   if(channel >= 0 && channel < 8){
     write(DAC60508_DAC0+channel, value);
+    // printf("Channel addresss = %02X\n", (uint8_t)DAC60508_DAC0+channel);
     return true;
   } else {
     return false;
@@ -63,7 +65,7 @@ uint16_t DAC60508::readDAC(uint8_t channel){
   if(channel >= 0 && channel < 8){
     return read(DAC60508_DAC0+channel);
   } else {
-    return 0;
+    return -1;
   }
 }
 
@@ -111,13 +113,20 @@ void DAC60508::readUntilFalse(uint8_t reg, uint8_t bit) {
   }
 }
 
+// A read operation is initiated by issuing a read command access cycle. 
+// After the read command, a second access cycle must be issued to get the requested data.
+// cycle must be issued to get the requested data.
 uint16_t DAC60508::read(uint8_t reg){
   uint8_t modReg = reg | DAC60508_SPI_READ<<(DAC60508_SPI_RW_INDEX-16);
   uint8_t dataArray[3] = {modReg, 0x00, 0x00};
   digitalWrite (_CS_PIN, LOW);
   wiringPiSPIDataRW (_SPI_CHANNEL, dataArray, (sizeof(dataArray)/sizeof(dataArray[0])));
   digitalWrite (_CS_PIN,  HIGH);
-  return dataArray[1]<<8 & dataArray[2];
+  // Second acess cycle
+  digitalWrite (_CS_PIN, LOW);
+  wiringPiSPIDataRW (_SPI_CHANNEL, dataArray, (sizeof(dataArray)/sizeof(dataArray[0])));
+  digitalWrite (_CS_PIN,  HIGH);
+  return (uint16_t)(dataArray[1]<<8 | dataArray[2]);
 }
 
 void DAC60508::write(uint8_t reg, uint16_t val){

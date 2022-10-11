@@ -72,16 +72,16 @@
 #define DAC60508_REFDIV_EN          8  //Refrence Divider   1:Gain 0.5x     0:Gain 1x     (0-Default)
 
 
-#define DAC60508_BUFFER_GAIN_2X     1   
-#define DAC60508_BUFFER_GAIN_1X     0 
+#define DAC60508_BUFFER_GAIN_2X     1
+#define DAC60508_BUFFER_GAIN_1X     0
 
-#define DAC60508_REF_GAIN_0X5       1   
-#define DAC60508_REF_GAIN_1X0       0  
+#define DAC60508_REF_GAIN_0X5       1
+#define DAC60508_REF_GAIN_1X0       0
 
 #define DAC60508_SPI_REG_INDEX     16
 #define DAC60508_SPI_RW_INDEX      23
-#define DAC60508_SPI_READ           1  
-#define DAC60508_SPI_WRITE          0 
+#define DAC60508_SPI_READ           1
+#define DAC60508_SPI_WRITE          0
 
 
 class DAC60508 {

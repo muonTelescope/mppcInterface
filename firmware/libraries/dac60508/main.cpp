@@ -18,14 +18,14 @@
 // Argv 2 Bit value to set for setByte
 
 int main (int argc, char** argv){
-  unsigned int data = (unsigned int)strtol(argv[1], NULL, 16);
-  printf("%04x\n", (unsigned int)data);
+  unsigned int channel = (unsigned int)strtol(argv[1], NULL, 16);
+  unsigned int data = (unsigned int)strtol(argv[2], NULL, 16);
+  printf("Channel %d set to 0x%04X, %d\n", channel, data, data);
 
   DAC60508 *dac = new DAC60508();
   dac->begin(CS_PIN, SPI_CHANNEL);
-  dac->setDAC(0, data);
-  dac->setDAC(1, data);
-  // printf("%d", dac->readmVDAC(0));
+  dac->setDAC(channel, data);
+  printf("Readback: %f\n\n", dac->readmVDAC(channel));
 
   return 0 ;
 }
