@@ -1,5 +1,12 @@
 
 
+# Installation of tools
+
+Add to you .
+```bash
+export PATH="/opt/oss-cad-suite/bin:$PATH"
+```
+
 
 Byte layout
 

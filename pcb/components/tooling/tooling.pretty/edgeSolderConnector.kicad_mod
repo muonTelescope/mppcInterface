@@ -1,0 +1,16 @@
+(footprint "edgeSolderConnector" (version 20211014) (generator pcbnew)
+  (layer "F.Cu")
+  (tedit 0)
+  (attr smd board_only exclude_from_pos_files exclude_from_bom)
+  (fp_text reference "REF**" (at 0 -5 unlocked) (layer "F.SilkS") hide
+    (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp 1df6d486-9929-42fd-9e05-2b3f89feae37)
+  )
+  (fp_text value "edgeSolderConnector" (at 0 6 unlocked) (layer "F.Fab") hide
+    (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp bda34b30-a1b5-4a0e-98d2-37ab08837ef7)
+  )
+  (fp_line (start -0.5 -0.25) (end 0.5 -0.25) (layer "F.Fab") (width 0.1) (tstamp 4a7943cd-bf05-4d92-8453-0d8c5c752d73))
+  (fp_rect (start 0.5 0) (end -0.5 -2) (layer "F.Fab") (width 0.1) (fill none) (tstamp ba8fa396-83c9-49f4-99e5-e6888a368b13))
+  (pad "1" connect rect (at 0 -1) (size 1 2) (layers "F.Cu" "F.Mask") (tstamp 46136a95-d30c-45e0-bf1f-5860568f73dd))
+)

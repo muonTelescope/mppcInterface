@@ -147,10 +147,16 @@ sudo ./setup.sh
 expand filwsystem, not needed as pi does it on boot now.
 
 
+Working buildsystem for gateware
+```
+Yosys 0.9+3981 (git sha1 7d2097b0, clang 7.0.1-8+rpi3+deb10u2 -fPIC -Os)
+arachne-pnr 0.1+328+0 (git sha1 c40fb22, g++ 8.3.0-6+rpi1 -O2)
 
+```
 
-
-
+By default the spidev driver on raspberry pi has a maximum transfer size of 4096 bytes.
+That might cause problems with this software so to change the default buffersize add spidev.bufsiz=65536 to /boot/cmdline.txt and reboot.
+Where 65536 is the maximum size you want to allow.
 
 
 get mac adress to set hostname

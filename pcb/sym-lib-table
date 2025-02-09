@@ -1,4 +1,5 @@
 (sym_lib_table
+  (version 7)
   (lib (name "S13360-2050VE")(type "KiCad")(uri "${KIPRJMOD}/components/S13360-2050VE/S13360-2050VE.kicad_sym")(options "")(descr ""))
   (lib (name "ICE40-LP384")(type "KiCad")(uri "${KIPRJMOD}/components/ICE40-LP384/ICE40-LP384.kicad_sym")(options "")(descr ""))
   (lib (name "PDS1-M")(type "KiCad")(uri "${KIPRJMOD}/components/PDS1-M/PDS1-M.kicad_sym")(options "")(descr ""))
@@ -19,4 +20,5 @@
   (lib (name "S03-XXXXXXX0R")(type "KiCad")(uri "${KIPRJMOD}/components/S03-XXXXXXX0R/S03-XXXXXXX0R.kicad_sym")(options "")(descr ""))
   (lib (name "BL-HUB37A-AV-TRB")(type "KiCad")(uri "${KIPRJMOD}/components/BL-HUB37A-AV-TRB/BL-HUB37A-AV-TRB.kicad_sym")(options "")(descr ""))
   (lib (name "MEA1")(type "KiCad")(uri "${KIPRJMOD}/components/MEA1/MEA1.kicad_sym")(options "")(descr ""))
+  (lib (name "ICE40-UP5K")(type "KiCad")(uri "${KIPRJMOD}/components/ICE40-UP5K/ICE40-UP5K.kicad_sym")(options "")(descr ""))
 )
