@@ -27,5 +27,4 @@ set_io --warn-no-port CLK     6  # Pin 6  on FPGA -> Pin 07, GPIO4, WiringPi 07,
 set_io --warn-no-port gpio18  7  # Pin 07 on FPGA -> Pin 12, GPIO18, WiringPi 01 on RaspberryPi 
 set_io --warn-no-port gpio17  5  # Pin 05 on FPGA -> Pin 11, GPIO17, WiringPi 00 on RaspberryPi
 set_io --warn-no-port gpio23  19 # Pin 19 on FPGA -> Pin 16, GPIO23, WiringPi 04 on RaspberryPi
-set_io --warn-no-port gpio22  18 # Pin 18 on FPGA -> Pin 15, GPIO22, WiringPi 03 on RaspberryPi
 set_io --warn-no-port gpio27  8  # Pin 08 on FPGA -> Pin 13, GPIO27, WiringPi 02 on RaspberryPi

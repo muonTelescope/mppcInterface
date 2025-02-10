@@ -20,7 +20,6 @@ module top (
     output LED2,
     output gpio27,  
     output gpio23,
-    output gpio22,
     output gpio18,  
     output gpio17      // UART TX output
 );
@@ -32,8 +31,8 @@ module top (
     wire CH0_R;
     wire CH1_R;
     wire CH2_R;
-    // wire CH3_R;
-    reg  [15:0] eventCount [7:0];  // Using 16 bits per counter, 8 counters
+    wire CH3_R;
+    reg  [7:0] eventCount [7:0];  // Using 8 bits per counter, 8 counters
 
     // After boot the inputs should float (or be driven externally).
     reg [16:0] bootTimeout = 0;
@@ -87,11 +86,11 @@ module top (
     // Parameters for burst mode.
     // Adjust ONE_SEC to your clock frequency; for example, 500k 5khz clock.
     parameter ONE_SEC     = 32'd500000;
-    parameter TOTAL_BYTES = 16; // 8 counters x 2 bytes per counter = 16 bytes
+    parameter TOTAL_BYTES = 8; // 8 counters x 1 byte per counter = 8 bytes
 
     // Internal state registers for burst mode.
     reg [31:0] idle_timer = 0; // Counts clock cycles in IDLE state.
-    reg [4:0]  byte_index = 0; // 0 to 15: which byte of eventCount to send.
+    reg [3:0]  byte_index = 0; // 0 to 7: which byte of eventCount to send.
     reg [1:0]  state = 0;      // State machine variable.
 
     localparam IDLE  = 2'd0;
@@ -124,22 +123,14 @@ module top (
                     if (!uart_tx_busy) begin
                         uart_send <= 1;  // Assert a one-cycle pulse.
                         case (byte_index)
-                            5'd0:  uart_data <= eventCount[0][7:0];
-                            5'd1:  uart_data <= eventCount[0][15:8];
-                            5'd2:  uart_data <= eventCount[1][7:0];
-                            5'd3:  uart_data <= eventCount[1][15:8];
-                            5'd4:  uart_data <= eventCount[2][7:0];
-                            5'd5:  uart_data <= eventCount[2][15:8];
-                            5'd6:  uart_data <= eventCount[3][7:0];
-                            5'd7:  uart_data <= eventCount[3][15:8];
-                            5'd8:  uart_data <= eventCount[4][7:0];
-                            5'd9:  uart_data <= eventCount[4][15:8];
-                            5'd10: uart_data <= eventCount[5][7:0];
-                            5'd11: uart_data <= eventCount[5][15:8];
-                            5'd12: uart_data <= eventCount[6][7:0];
-                            5'd13: uart_data <= eventCount[6][15:8];
-                            5'd14: uart_data <= eventCount[7][7:0];
-                            5'd15: uart_data <= eventCount[7][15:8];
+                            3'd0:  uart_data <= eventCount[0];
+                            3'd1:  uart_data <= eventCount[1];
+                            3'd2:  uart_data <= eventCount[2];
+                            3'd3:  uart_data <= eventCount[3];
+                            3'd4:  uart_data <= eventCount[4];
+                            3'd5: uart_data <= eventCount[5];
+                            3'd6: uart_data <= eventCount[6];
+                            3'd7: uart_data <= eventCount[7];
                             default: uart_data <= 8'h00;
                         endcase
                         state <= WAIT;
@@ -154,6 +145,14 @@ module top (
                         if (byte_index == TOTAL_BYTES - 1) begin
                             // After all bytes are sent, reset eventCounts to 0
                             eventCount[0] <= eventCount[0] + 1;
+                            // eventCount[1] <= 0;
+                            // eventCount[2] <= 0;
+                            // eventCount[3] <= 0;
+                            // eventCount[4] <= 0;
+                            // eventCount[5] <= 0;
+                            eventCount[6] <= 0;
+                            eventCount[7] <= 0;
+
                             state <= IDLE; // Burst finished; return to waiting one second.
                         end else begin
                             byte_index <= byte_index + 1;
@@ -201,18 +200,18 @@ module top (
 
     always @(posedge CH0_R)
         eventCount[1] <= eventCount[1] + 1;
-    always @(posedge CH1_R)
-        eventCount[2] <= eventCount[2] + 1;
-    always @(posedge CH2_R)
-        eventCount[3] <= eventCount[3] + 1;
+    // always @(posedge CH1_R)
+    //     eventCount[2] <= eventCount[2] + 1;
+    // always @(posedge CH2_R)
+    //     eventCount[3] <= eventCount[3] + 1;
     always @(posedge C01)
-        eventCount[4] <= eventCount[4] + 1;
+        eventCount[2] <= eventCount[2] + 1;
     always @(posedge C02)
-        eventCount[5] <= eventCount[5] + 1;
+        eventCount[3] <= eventCount[3] + 1;
     always @(posedge C12)
-        eventCount[6] <= eventCount[6] + 1;
+        eventCount[4] <= eventCount[4] + 1;
     always @(posedge C012)
-        eventCount[7] <= eventCount[7] + 1;
+        eventCount[5] <= eventCount[5] + 1;
 
 endmodule
 
